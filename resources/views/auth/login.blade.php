@@ -1,8 +1,20 @@
 @extends('layouts.auth')
 
 @section('content')
+    <style>
+        body
+        {
+            background-image:url('images/hero_1.jpg');
+            background-size: cover;
+
+        }
+        .panel-body{
+            background: transparent;
+        }
+
+    </style>
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">{{ ucfirst(config('app.name')) }} @lang('quickadmin.qa_login')</div>
                 <div class="panel-body">
@@ -30,7 +42,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">@lang('quickadmin.qa_email')</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <input type="email"
                                        class="form-control"
                                        name="email"
@@ -41,18 +53,14 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">@lang('quickadmin.qa_password')</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <input type="password"
                                        class="form-control"
                                        name="password">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <a href="{{ route('auth.password.reset') }}">@lang('quickadmin.qa_forgot_password')</a>
-                            </div>
-                        </div>
+
 
 
                         <div class="form-group">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Booking;
 use App\Room;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -17,9 +18,11 @@ class BookingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( )
     {
-        if (!Gate::allows('booking_access')) {
+        if (!Gate::allows('booking_access', function ($user) {
+            return in_array($user->role_id, [1]);
+        })) {
             return abort(401);
         }
 
@@ -49,8 +52,8 @@ class BookingsController extends Controller
 
 
         $rooms = Room::get()->pluck('room_number', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
-
-        return view('admin.bookings.create', compact('rooms'));
+        $users = User::get()->pluck('id','id')->prepend(trans('quickadmin.qa_please_select'),'');
+        return view('admin.bookings.create', compact('rooms','users'));
     }
 
     /**
@@ -84,10 +87,10 @@ class BookingsController extends Controller
 
 
         $rooms = Room::get()->pluck('room_number', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
-
+        $users = User::get()->pluck('id','id')->prepend(trans('quickadmin.qa_please_select'),'');
         $booking = Booking::findOrFail($id);
 
-        return view('admin.bookings.edit', compact('booking', 'rooms'));
+        return view('admin.bookings.edit', compact('booking', 'rooms','users'));
     }
 
     /**

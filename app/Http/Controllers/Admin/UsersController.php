@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Booking;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -115,8 +116,10 @@ class UsersController extends Controller
             return abort(401);
         }
         $user = User::findOrFail($id);
+        $bookings = \App\Booking::where('user_id', $id)->get();
 
-        return view('admin.users.show', compact('user'));
+
+        return view('admin.users.show', compact('user','bookings'));
     }
 
 

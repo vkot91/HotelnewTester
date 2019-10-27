@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 /**
  * Class Booking
@@ -19,9 +20,7 @@ class Booking extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['time_from', 'time_to', 'additional_information', 'room_id','first_name', 'last_name', 'address', 'phone', 'email'];
-
-
+    protected $fillable = ['time_from', 'time_to', 'additional_information', 'room_id','first_name', 'last_name', 'address', 'phone', 'email','user_id'];
     /**
      * Set to null if empty
      * @param $input
@@ -35,8 +34,14 @@ class Booking extends Model
     public function setRoomIdAttribute($input)
     {
         $this->attributes['room_id'] = $input ? $input : null;
+
     }
 
+    public function setUserIdAttribute($input)
+    {
+        $this->attributes['user_id'] = $input ? $input : null;
+
+    }
     /**
      * Set attribute to date format
      * @param $input
@@ -100,6 +105,12 @@ class Booking extends Model
     public function room()
     {
         return $this->belongsTo(Room::class, 'room_id')->withTrashed();
+    }
+
+
+    public function user()
+    {
+        return $this ->belongsTo(User::class,'user_id');
     }
 
     public function getFullNameAttribute()

@@ -5,6 +5,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Hash;
+use Auth;
+use App\Booking;
 
 /**
  * Class User
@@ -49,7 +51,11 @@ class User extends Authenticatable
     }
     
     
-    
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class,'user_id');
+    }
+
 
     public function sendPasswordResetNotification($token)
     {

@@ -5,7 +5,8 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
 
         <span class="logo-lg">
-
+           Go to Main
+        </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -119,11 +120,14 @@
                 </div>
             </div>
 
+
         </div>
     </div>
 
-    {!! Form::submit(trans('quickadmin.qa_save'), ['class' => 'btn btn-danger']) !!}
+    {!! Form::submit(trans('quickadmin.qa_save'),['class' => 'btn btn-danger'])!!}
+
     {!! Form::close() !!}
+
 @stop
 
 @section('javascript')
@@ -135,6 +139,13 @@
     <script>
         $('.datetimepicker').datetimepicker({
             format: "YYYY-MM-DD HH:mm"
+
         });
+        document.getElementById('click').onclick = function () {
+            alert('Hello world');
+
+        }
+
     </script>
 @stop
+

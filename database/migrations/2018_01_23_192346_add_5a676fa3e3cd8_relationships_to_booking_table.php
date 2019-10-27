@@ -19,6 +19,14 @@ class Add5a676fa3e3cd8RelationshipsToBookingTable extends Migration
                 }
 
         });
+        Schema::table('bookings',function (Blueprint $table)
+        {
+           if(!Schema::hasColumn('bookings','user_id'))
+           {
+               $table->integer('user_id')->unsigned()->nullable();
+               $table->foreign('user_id','110461_5a676fa239ffy')->references('id')->on('users')->onDelete('cascade');
+           }
+        });
     }
 
     /**

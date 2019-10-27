@@ -26,14 +26,7 @@ return [
 		],
 	],
 
-	'countries' => [
-		'title' => 'Countries',
-		'fields' => [
-			'shortcode' => 'Shortcode',
-			'title' => 'Title',
-			'name' => 'Name',
-		],
-	],
+
 	'categories' => [
 		'title' => 'Categories',
 		'fields' => [
@@ -78,6 +71,7 @@ return [
 			'time-from' => 'Time from',
 			'time-to' => 'Time to',
 			'additional-information' => 'Additional information',
+            'user_id' => 'User id'
 		],
 	],
 
@@ -323,5 +317,6 @@ return [
 	'qa_parse_csv' => 'Parse CSV',
 	'qa_import_data' => 'Import data',
 	'qa_imported_rows_to_table' => 'Imported :rows rows to :table table',
-	'quickadmin_title' => 'hotel-booking',
+	'quickadmin_title' => 'Kompass',
+
 ];

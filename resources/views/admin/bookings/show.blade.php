@@ -48,6 +48,11 @@
                             <th>@lang('quickadmin.bookings.fields.additional-information')</th>
                             <td field-key='additional_information'>{!! $booking->additional_information !!}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('quickadmin.bookings.fields.user_id')</th>
+                            <td field-key='user_id'>{!! $booking->name!!}</td>
+
+                        </tr>
                     </table>
                 </div>
             </div>
