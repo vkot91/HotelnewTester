@@ -23,6 +23,7 @@ return [
 			'password' => 'Password',
 			'role' => 'Role',
 			'remember-token' => 'Remember token',
+            'user_id' => 'User ID'
 		],
 	],
 
@@ -55,6 +56,7 @@ return [
 			'category' => 'Category',
 			'description' => 'Description',
             'actions' => 'Actions',
+            'user' =>'User ID and Name'
 		],
 	],
 
@@ -71,7 +73,7 @@ return [
 			'time-from' => 'Time from',
 			'time-to' => 'Time to',
 			'additional-information' => 'Additional information',
-            'user_id' => 'User id'
+            'user_id' => 'User ID'
 		],
 	],
 
@@ -83,6 +85,7 @@ return [
         'book_room' => 'Book room',
     ],
 	'qa_create' => 'Create',
+
 	'qa_save' => 'Save',
 	'qa_edit' => 'Edit',
 	'qa_restore' => 'Restore',

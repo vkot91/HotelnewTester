@@ -32,7 +32,6 @@ class RoomsController extends Controller
         } else {
             $rooms = Room::all();
         }
-
         return view('admin.rooms.index', compact('rooms'));
     }
 
@@ -47,7 +46,7 @@ class RoomsController extends Controller
             return abort(401);
         }
         
-        $categories = Category::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $categories = Category::get()->pluck('id', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
         return view('admin.rooms.create',compact('categories'));
     }
 

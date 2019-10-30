@@ -88,10 +88,17 @@ class AuthServiceProvider extends ServiceProvider
             return in_array($user->role_id, [1]);
         });
 
-        // Auth gates for: Bookings
+//         Auth gates for: Bookings
         Gate::define('booking_access', function ($user) {
-            return in_array($user->role_id, [1,2]);
+            return in_array($user->role_id, [1]);
         });
+
+
+        Gate::define('booking_accessUsers', function ($user) {
+            return in_array($user->role_id, [2]);
+        });
+
+
 
         Gate::define('booking_create', function ($user) {
             return in_array($user->role_id, [1,2]);
@@ -99,8 +106,13 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('booking_edit', function ($user) {
             return in_array($user->role_id, [1,2]);
         });
+
+
         Gate::define('booking_view', function ($user) {
-            return in_array($user->role_id, [1,2,4]);
+            return in_array($user->role_id, [1]);
+        });
+        Gate::define('booking_viewUsers', function ($user) {
+            return in_array($user->role_id, [2]);
         });
         Gate::define('booking_delete', function ($user) {
             return in_array($user->role_id, [1]);

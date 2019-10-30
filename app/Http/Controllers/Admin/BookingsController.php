@@ -20,9 +20,7 @@ class BookingsController extends Controller
      */
     public function index( )
     {
-        if (!Gate::allows('booking_access', function ($user) {
-            return in_array($user->role_id, [1]);
-        })) {
+        if (!Gate::allows('booking_access')) {
             return abort(401);
         }
 

@@ -24,6 +24,10 @@
                             <th>@lang('quickadmin.rooms.fields.description')</th>
                             <td field-key='description'>{!! $room->description !!}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('quickadmin.rooms.fields.category')</th>
+                            <td field-key='description'>{!! $room->category->name or '' !!}</td>
+                        </tr>
                     </table>
                 </div>
             </div><!-- Nav tabs -->
@@ -40,7 +44,7 @@
                     <table class="table table-bordered table-striped {{ count($bookings) > 0 ? 'datatable' : '' }}">
                         <thead>
                         <tr>
-                            <th>@lang('quickadmin.bookings.fields.customer')</th>
+                            <th>@lang('quickadmin.rooms.fields.user')</th>
                             <th>@lang('quickadmin.bookings.fields.room')</th>
                             <th>@lang('quickadmin.bookings.fields.time-from')</th>
                             <th>@lang('quickadmin.bookings.fields.time-to')</th>
@@ -57,7 +61,7 @@
                         @if (count($bookings) > 0)
                             @foreach ($bookings as $booking)
                                 <tr data-entry-id="{{ $booking->id }}">
-                                    <td field-key='customer'>{{ $booking->customer->first_name or '' }}</td>
+                                    <td field-key='user'>{{ $booking->user->id or '' }}  .  {{ $booking->user->name or '' }}</td>
                                     <td field-key='room'>{{ $booking->room->room_number or '' }}</td>
                                     <td field-key='time_from'>{{ $booking->time_from }}</td>
                                     <td field-key='time_to'>{{ $booking->time_to }}</td>

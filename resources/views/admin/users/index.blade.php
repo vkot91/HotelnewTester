@@ -24,7 +24,7 @@
                         @can('user_delete')
                             <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
                         @endcan
-
+                        <th>@lang('quickadmin.users.fields.user_id')</th>
                         <th>@lang('quickadmin.users.fields.name')</th>
                         <th>@lang('quickadmin.users.fields.email')</th>
                         <th>@lang('quickadmin.users.fields.role')</th>
@@ -40,8 +40,9 @@
                                 @can('user_delete')
                                     <td></td>
                                 @endcan
-
+                                <td field-key='user_id'>{{ $user->id }}</td>
                                 <td field-key='name'>{{ $user->name }}</td>
+
                                 <td field-key='email'>{{ $user->email }}</td>
                                 <td field-key='role'>{{ $user->role->title or '' }}</td>
                                                                 <td>

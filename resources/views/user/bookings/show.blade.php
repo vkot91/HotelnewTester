@@ -48,18 +48,14 @@
                             <th>@lang('quickadmin.bookings.fields.additional-information')</th>
                             <td field-key='additional_information'>{!! $booking->additional_information !!}</td>
                         </tr>
-                        <tr>
-                            <th>@lang('quickadmin.bookings.fields.user_id')</th>
-                            <td field-key='user_id'>{{ $booking->user->id or ''}}</td>
 
-                        </tr>
                     </table>
                 </div>
             </div>
 
             <p>&nbsp;</p>
 
-            <a href="{{ route('admin.bookings.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
+            <a href="{{ route('user.bookings.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
         </div>
     </div>
 @stop

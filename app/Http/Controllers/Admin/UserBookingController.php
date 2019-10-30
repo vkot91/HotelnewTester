@@ -14,7 +14,7 @@ class UserBookingController extends Controller
 {
     public function index( )
     {
-        if (!Gate::allows('booking_accessUser')) {
+        if (!Gate::allows('booking_accessUsers')) {
             return abort(401);
         }
 
@@ -28,7 +28,7 @@ class UserBookingController extends Controller
             $bookings = Booking::all();
         }
 
-        return view('user.index', compact('bookings'));
+        return view('user.bookings.index', compact('bookings'));
     }
 
     /**
@@ -72,7 +72,7 @@ class UserBookingController extends Controller
         $users = User::get()->pluck('id','id')->prepend(trans('quickadmin.qa_please_select'),'');
         $booking = Booking::findOrFail($id);
 
-        return view('user.edit', compact('booking', 'rooms','users'));
+        return view('user.bookings.edit', compact('booking', 'rooms','users'));
     }
 
     /**
@@ -91,7 +91,7 @@ class UserBookingController extends Controller
         $booking->update($request->all());
 
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.bookings.index');
     }
 
 
@@ -103,12 +103,12 @@ class UserBookingController extends Controller
      */
     public function show($id)
     {
-        if (!Gate::allows('booking_view')) {
+        if (!Gate::allows('booking_viewUsers')) {
             return abort(401);
         }
         $booking = Booking::findOrFail($id);
 
-        return view('user.show', compact('booking'));
+        return view('user.bookings.show', compact('booking'));
     }
 
 
@@ -126,7 +126,7 @@ class UserBookingController extends Controller
         $booking = Booking::findOrFail($id);
         $booking->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.bookings.index');
     }
 
     /**
@@ -163,7 +163,7 @@ class UserBookingController extends Controller
         $booking = Booking::onlyTrashed()->findOrFail($id);
         $booking->restore();
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.bookings.index');
     }
 
     /**
@@ -180,6 +180,6 @@ class UserBookingController extends Controller
         $booking = Booking::onlyTrashed()->findOrFail($id);
         $booking->forceDelete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.bookings.index');
     }
 }

@@ -48,16 +48,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
    Route::post('bookings_restore/{id}', ['uses' => 'Admin\BookingsController@restore', 'as' => 'bookings.restore']);
    Route::delete('bookings_perma_del/{id}', ['uses' => 'Admin\BookingsController@perma_del', 'as' => 'bookings.perma_del']);
 
-    Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
-        Route::resource('bookings', 'Admin\UserBookingController', ['except' => 'bookings.create']);
-        Route::get('bookings/create/', ['as' => 'bookings.create', 'uses' => 'Admin\UserBookingControllerr@create']);
-        Route::post('bookings_mass_destroy', ['uses' => 'Admin\UserBookingController@massDestroy', 'as' => 'bookings.mass_destroy']);
-        Route::post('bookings_restore/{id}', ['uses' => 'Admin\UserBookingController@restore', 'as' => 'bookings.restore']);
-        Route::delete('bookings_perma_del/{id}', ['uses' => 'Admin\UserBookingController@perma_del', 'as' => 'bookings.perma_del']);
-
-
-    });
     //Route::resource('/find_rooms', 'Admin\FindRoomsController', ['except' => 'create']);
     Route::get('/find_rooms', 'Admin\FindRoomsController@index')->name('find_rooms.index');
     Route::post('/find_rooms', 'Admin\FindRoomsController@index');
@@ -65,6 +56,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
         'as' => 'find_rooms.create',
         'uses' => 'Admin\BookingsController@create'
     ]);*/
+});
+Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], function () {
+    Route::resource('bookings', 'Admin\UserBookingController', ['except' => 'bookings.create']);
+    Route::get('bookings/create/', ['as' => 'bookings.create', 'uses' => 'Admin\UserBookingControllerr@create']);
+    Route::post('bookings_mass_destroy', ['uses' => 'Admin\UserBookingController@massDestroy', 'as' => 'bookings.mass_destroy']);
+    Route::post('bookings_restore/{id}', ['uses' => 'Admin\UserBookingController@restore', 'as' => 'bookings.restore']);
+    Route::delete('bookings_perma_del/{id}', ['uses' => 'Admin\UserBookingController@perma_del', 'as' => 'bookings.perma_del']);
+
+
 });
 Route::get('events', function () {
     return view('user.index');

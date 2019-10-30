@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,5 +30,9 @@ class Room extends Model
     public function booking()
     {
         return $this->HasOne(Booking::class, 'room_id')->withTrashed();
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

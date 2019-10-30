@@ -79,9 +79,18 @@
                     <i class="fa fa-bell"></i>
                     <span class="title">@lang('quickadmin.bookings.title')</span>
                 </a>
+
+
             </li>
             @endcan
-
+@can('booking_accessUsers')
+                <li class="{{ $request->segment(2) == 'bookings' ? 'active' : '' }}">
+                <a href="{{ route('user.bookings.index') }}">
+                    <i class="fa fa-bell"></i>
+                    <span class="title">@lang('quickadmin.bookings.title')</span>
+                </a>
+                </li>
+    @endcan
             @can('find_room_access')
             <li class="{{ $request->segment(2) == 'find_rooms' ? 'active' : '' }}">
                 <a href="{{ route('admin.find_rooms.index') }}">
