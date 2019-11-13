@@ -46,7 +46,7 @@ class RoomsController extends Controller
             return abort(401);
         }
         
-        $categories = Category::get()->pluck('id', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $categories = Category::get()->pluck('name', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
         return view('admin.rooms.create',compact('categories'));
     }
 

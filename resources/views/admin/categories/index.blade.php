@@ -10,7 +10,7 @@
     </p>
     @endcan
 
-    @can('categoty_delete')
+    @can('category_delete')
     <p>
         <ul class="list-inline">
             <li><a href="{{ route('admin.categories.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">@lang('quickadmin.qa_all')</a></li> |
@@ -33,64 +33,68 @@
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
 
+
                         <th>@lang('quickadmin.categories.fields.name')</th>
+
+
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
-                        <th>&nbsp;</th>
                         @endif
                     </tr>
                 </thead>
 
                 <tbody>
                     @if (count($categories) > 0)
-                        @foreach ($categories as $country)
-                            <tr data-entry-id="{{ $country->id }}">
-                                @can('country_delete')
-                                    @if ( request('show_deleted') != 1 )<td></td>@endif
+                        @foreach ($categories as $category)
+                            <tr data-entry-id="{{ $category->id }}">
+                            <td field-key='name'>{{ $category->name }}</td>
+
+                            @can('category_delete')
+                                @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
-                                <td field-key='name'>{{ $country->name }}</td>
-                                @if( request('show_deleted') == 1 )
-                                <td>
-                                    @can('country_delete')
-                                                                        {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'POST',
-                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.categories.restore', $country->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_restore'), array('class' => 'btn btn-xs btn-success')) !!}
-                                    {!! Form::close() !!}
-                                @endcan
-                                    @can('country_delete')
-                                                                        {!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.categories.perma_del', $country->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                @endcan
-                                </td>
+                            @if( request('show_deleted') == 1 )
+                                    <td>
+                                        @can('category_delete')
+                                            {!! Form::open(array(
+            'style' => 'display: inline-block;',
+            'method' => 'POST',
+            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+            'route' => ['admin.categories.restore', $category->id])) !!}
+                                            {!! Form::submit(trans('quickadmin.qa_restore'), array('class' => 'btn btn-xs btn-success')) !!}
+                                            {!! Form::close() !!}
+                                        @endcan
+                                        @can('category_delete')
+                                            {!! Form::open(array(
+            'style' => 'display: inline-block;',
+            'method' => 'DELETE',
+            'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+            'route' => ['admin.categories.perma_del', $category->id])) !!}
+                                            {!! Form::submit(trans('quickadmin.qa_permadel'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                            {!! Form::close() !!}
+                                        @endcan
+                                    </td>
                                 @else
-                                <td>
-                                    @can('country_view')
-                                    <a href="{{ route('admin.categories.show',[$country->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
-                                    @endcan
-                                    @can('country_edit')
-                                    <a href="{{ route('admin.categories.edit',[$country->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
-                                    @endcan
-                                    @can('country_delete')
-{!! Form::open(array(
-                                        'style' => 'display: inline-block;',
-                                        'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
-                                        'route' => ['admin.categories.destroy', $country->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
-                                    {!! Form::close() !!}
-                                    @endcan
-                                </td>
+                                    <td>
+                                        @can('category_view')
+                                            <a href="{{ route('admin.categories.show',[$category->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                        @endcan
+                                        @can('category_edit')
+                                            <a href="{{ route('admin.categories.edit',[$category->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                        @endcan
+                                        @can('category_delete')
+                                            {!! Form::open(array(
+                                                                                    'style' => 'display: inline-block;',
+                                                                                    'method' => 'DELETE',
+                                                                                    'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                                                                    'route' => ['admin.categories.destroy', $category->id])) !!}
+                                            {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                            {!! Form::close() !!}
+                                        @endcan
+                                    </td>
                                 @endif
                             </tr>
+                            <tr></tr>
                         @endforeach
                     @else
                         <tr>

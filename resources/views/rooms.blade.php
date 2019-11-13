@@ -48,7 +48,7 @@
           <div class="py-1">
             <div class="row align-items-center">
               <div class="col-2">
-                <h2 class="mb-0 site-logo"><a href="/">Kompass</a></h2>
+                <h2 class="mb-0 site-logo"><a href="/">Account</a></h2>
               </div>
               <div class="col-10">
                 <nav class="site-navigation text-right" role="navigation">
@@ -119,27 +119,27 @@
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-5">
             <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
+              <a href="standardroom" class="d-block mb-0 thumbnail"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
               <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">Standard Room</a></h3>
+                <h3 class="heading mb-0"><a href="standardroom">Standard Room</a></h3>
                 <strong class="price">$350.00 / per night</strong>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 mb-5">
             <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
+              <a href="familyroom" class="d-block mb-0 thumbnail"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
               <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">Family Room</a></h3>
+                <h3 class="heading mb-0"><a href="familyroom">Family Room</a></h3>
                 <strong class="price">$400.00 / per night</strong>
               </div>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 mb-5">
             <div class="hotel-room text-center">
-              <a href="#" class="d-block mb-0 thumbnail"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
+              <a href="singleroom" class="d-block mb-0 thumbnail"><img src="images/img_3.jpg" alt="Image" class="img-fluid"></a>
               <div class="hotel-room-body">
-                <h3 class="heading mb-0"><a href="#">Single Room</a></h3>
+                <h3 class="heading mb-0"><a href="singleroom">Single Room</a></h3>
                 <strong class="price">$255.00 / per night</strong>
               </div>
             </div>

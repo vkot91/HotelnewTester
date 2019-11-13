@@ -18,7 +18,7 @@ class Create1516728105RoomsTable extends Migration
                 $table->string('room_number');
                 $table->integer('floor')->nullable();
                 $table->text('description')->nullable();
-                
+                $table->integer('price');
                 $table->timestamps();
                 $table->softDeletes();
 

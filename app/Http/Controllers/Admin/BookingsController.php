@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Booking;
 use App\Room;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -51,7 +52,9 @@ class BookingsController extends Controller
 
         $rooms = Room::get()->pluck('room_number', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
         $users = User::get()->pluck('id','id')->prepend(trans('quickadmin.qa_please_select'),'');
-        return view('admin.bookings.create', compact('rooms','users'));
+        $rooms2 = Room::get()->pluck('price', 'id');
+
+        return view('admin.bookings.create', compact('rooms','users','rooms2'));
     }
 
     /**
@@ -66,7 +69,7 @@ class BookingsController extends Controller
             return abort(401);
         }
         $booking = Booking::create($request->all());
-
+        \Session::flash('flash_message','Your reservation was successfully created. Awaiting confirmation from the administrator');
         return redirect()->route('home');
     }
 
@@ -197,5 +200,11 @@ class BookingsController extends Controller
         $booking->forceDelete();
 
         return redirect()->route('admin.bookings.index');
+    }
+    public function diff(Request $request)
+    {
+        $start_time = \Carbon\Carbon::parse($request->input('time_from'));
+        $finish_time = \Carbon\Carbon::parse($request->input('time_to'));
+        $diff_days = $start_time->diffInDays($finish_time, false);
     }
 }

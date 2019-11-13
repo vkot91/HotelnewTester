@@ -48,7 +48,7 @@
           <div class="py-1">
             <div class="row align-items-center">
               <div class="col-2">
-                <h2 class="mb-0 site-logo"><a href="/">Kompass</a></h2>
+                <h2 class="mb-0 site-logo"><a href="index.php">Account</a></h2>
               </div>
               <div class="col-10">
                 <nav class="site-navigation text-right" role="navigation">
@@ -57,10 +57,10 @@
                     <div class="d-inline-block d-lg-none  ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
                     <ul class="site-menu js-clone-nav d-none d-lg-block">
                       <li>
-                        <a href="index.php">Home</a>
+                        <a href="/">Home</a>
                       </li>
                       <li class="has-children active">
-                        <a href="rooms">Rooms</a>
+                        <a href="">Rooms</a>
                         <ul class="dropdown arrow-top">
                           <li><a href="standardroom">Standard Room</a></li>
                           <li><a href="familyroom">Family Room</a></li>
@@ -102,7 +102,7 @@
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7 text-center" data-aos="fade">
               <span class="caption mb-3">Luxurious Rooms</span>
-              <h1 class="mb-4">Standard room</h1>
+              <h1 class="mb-4">Single room</h1>
             </div>
           </div>
         </div>
@@ -157,34 +157,28 @@
 
           </div>
           <div class="text-container">
-          <p>Powierzchnia: 26m2</p>
+            <h3>One-person room PLUS</h3>
 
-          <p>Łóżko:1 łożko</p>
-          <p>Liczba osób: 1 osoba</p>
-
-          @if (Route::has('login'))
-
-        @auth
-<a href="/admin/home" class="btn btn-light" role="button" aria-disabled="true">REZERWUJ</a>
-        @else
-
-            <a href="{{ route('login') }} " class="btn btn-light" role="button" aria-disabled="true">REZERWACJA</a>
-
-
+            <strong>The room is equipped with:</strong>
+            <ul>
+              <li>bathroom with shower,</li>
+              <li>TV with Polish and foreign channels,</li>
+              <li>telephone,</li>
+              <li>radio,</li>
+              <li>permanent Internet access,</li>
+              <li>desk for work.</li>
+            </ul>
+            @if (Route::has('login'))
+              @auth
+                @else
+            <a style=" margin-left: 30px"href="{{ route('login') }} " class="btn btn-dark" role="button" aria-disabled="true">Book Now</a>
         @endauth
-
-@endif
-
+        @endif
           </div>
         </div>
-
-
-<p>Wszystkie pokoje Delux wyposażone są w dwa oddzielne łóżka z możliwością komfortowego łączenia, łazienkę z kabiną prysznicową, toaletą i umywalką, kanapę, biurko do pracy, klimatyzację, TV SAT, minibar, sejf oraz nieograniczony dostęp do hotelowej sieci HOT SPOT. Pokoje zlokalizowane są na parterze oraz pierwszym piętrze, a dla wygody naszych Gości dostępna jest winda. Dzięki klasycznej elegancji i niepowtarzalnej atmosferze pokoje zapewniają idealne warunki do pracy i wypoczynku.</p>
+        <p>The room with especially elegant furniture. It is equipped with marital bed and comfortable sofa for rest, and due to that it can be easily used as one- two- or three-person room.
       </div>
     </div>
-
-
-
 
     <footer class="site-footer">
       <div class="container">

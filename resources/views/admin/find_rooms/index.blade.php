@@ -50,6 +50,7 @@
                     <th>@lang('quickadmin.rooms.fields.room-number')</th>
                     <th>@lang('quickadmin.rooms.fields.floor')</th>
                     <th>@lang('quickadmin.rooms.fields.description')</th>
+                    <th>Price per Night</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +60,7 @@
                             <td field-key='room_number'>{{ $room->room_number }}</td>
                             <td field-key='floor'>{{ $room->floor }}</td>
                             <td field-key='description'>{!! $room->description !!}</td>
+                            <td field-key='price'>{!! $room->price !!}</td>
                             <td>
                                 @can('booking_create')
                                     <button class="btn btn-danger">

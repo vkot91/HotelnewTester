@@ -12,7 +12,7 @@ use App\Http\Requests\Admin\UpdateBookingsRequest;
 
 class UserBookingController extends Controller
 {
-    public function index( )
+    public function index(Request $request)
     {
         if (!Gate::allows('booking_accessUsers')) {
             return abort(401);
@@ -93,8 +93,6 @@ class UserBookingController extends Controller
 
         return redirect()->route('user.bookings.index');
     }
-
-
     /**
      * Display Booking.
      *

@@ -37,6 +37,7 @@
                         <th>@lang('quickadmin.rooms.fields.floor')</th>
                         <th>@lang('quickadmin.rooms.fields.description')</th>
                         <th>@lang('quickadmin.rooms.fields.category')</th>
+                        <th>@lang('quickadmin.rooms.fields.price')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -57,6 +58,8 @@
                                 <td field-key='floor'>{{ $room->floor }}</td>
                                 <td field-key='description'>{!! $room->description !!}</td>
                                 <td field-key='category_id'>{{ $room->category->name or ''}}</td>
+                                <td field-key='category_id'>{{ $room->price or ''}}</td>
+
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     @can('room_delete')

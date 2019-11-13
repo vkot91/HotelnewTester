@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Booking;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -158,5 +159,8 @@ class UsersController extends Controller
             }
         }
     }
-
+    public function profile()
+    {
+        return view('home',array('user'=>Auth::user()));
+    }
 }

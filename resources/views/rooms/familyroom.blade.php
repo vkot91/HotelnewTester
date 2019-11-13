@@ -1,9 +1,3 @@
-<?php
-$Standard=350;
-$Family=600;
-$Single=250;
-
- ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -66,7 +60,7 @@ $Single=250;
                         <a href="index.php">Home</a>
                       </li>
                       <li class="has-children active">
-                        <a href="rooms">Rooms</a>
+                        <a href="">Rooms</a>
                         <ul class="dropdown arrow-top">
                           <li><a href="standardroom">Standard Room</a></li>
                           <li><a href="familyroom">Family Room</a></li>
@@ -76,13 +70,13 @@ $Single=250;
 
                         </ul>
                       </li>
-                      <li><a href="events">Events</a></li>
+                
                       <li><a href="about">About</a></li>
                       <li><a href="contact">Contact</a></li>
                       @if (Route::has('login'))
 
                     @auth
-                        <li><a href="{{ url('/home') }}">Konto</a></li>
+                        <li><a href="{{ url('/home') }}">Account</a></li>
                     @else
                         <li><a href="{{ route('login') }}">Login</a></li>
 
@@ -108,8 +102,7 @@ $Single=250;
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7 text-center" data-aos="fade">
               <span class="caption mb-3">Luxurious Rooms</span>
-              <h1 class="mb-4">Standard room</h1>
-
+              <h1 class="mb-4">Family room</h1>
             </div>
           </div>
         </div>
@@ -120,7 +113,7 @@ $Single=250;
       <div class="container">
         <div class="row">
           <div class="col-md-6 mx-auto text-center mb-5 section-heading">
-            <h2 class="mb-5">Rezerwacja</h2>
+            <h2 class="mb-5">Our Rooms</h2>
           </div>
         </div>
         <div class="row">
@@ -164,131 +157,32 @@ $Single=250;
 
           </div>
           <div class="text-container">
-
-            <form method="post" action="{{route('histories.store')}}">
-  @csrf
-            <div style="width: 400px;">
-            </div>
-            <div style="display: flex; padding-bottom: 18px;width : 450px;">
-
-            <div style=" margin-left : 0; margin-right : 1%; width : 49%;"><td>Imię</td><span style="color: red;"> *</span><br/>
-
-            <td><input type="text" id="data_2" name="name" style="width: 100%;" class="form-control"/></td>
-            </div>
-            <div style=" margin-left : 1%; margin-right : 0; width : 49%;"><td>Nazwisko</td><span style="color: red;"> *</span><br/>
-
-          <td>  <input type="text" id="data_3" name="surname" style="width: 100%;" class="form-control"/></td>
-            </div>
-          </div><div style="padding-bottom: 18px;"><td>Phone</td><span style="color: red;"> *</span><br/>
-
-          <td>  <input type="text" id="data_4" name="nrtel" style="width : 450px;" class="form-control"/></td>
-            </div>
-            <div style=" margin-left : 0; margin-right : 1%; width : 49%;"><td>Email</td><span style="color: red;"> *</span><br/>
-
-            <td><input type="text" id="data_2" name="email" style="width: 100%;" class="form-control"/></td>
-            </div>
-            <div style="padding-bottom: 18px;"><td>Arrival date</td><span style="color: red;"> *</span><br/>
+            <h3>Room Family</h3>
+            <strong>The room is equipped with:</strong>
+            <ul>
+              <li>large bathroom with bathtub</li>
+              <li>TV with Polish and foreign channels,</li>
+              <li>telephone,</li>
+              <li>radio,</li>
+              <li> permanent Internet access,</li>
+              <li>desk for work.</li>
+            </ul>
 
 
-            <td><input type="text" id="data_6" name="data_check" style="width : 250px;" class="form-control"/></td>
-            </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.4.0/pikaday.min.js" type="text/javascript"></script>
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.4.0/css/pikaday.min.css" rel="stylesheet" type="text/css" />
-            <div style="padding-bottom: 18px;"><td>Departure date</td><span style="color: red;"> *</span><br/>
-          <td>  <input type="text" id="data_7" name="data_checkout" style="width : 250px;" class="form-control"/></td>
-            </div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.4.0/pikaday.min.js" type="text/javascript"></script>
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.4.0/css/pikaday.min.css" rel="stylesheet" type="text/css" />
-<div class="container">
 
-<form action="" method="post">
 
-<label>Dodac Parking?</label>
-<input type="radio" name="parking_status" value="1"?/>Yes
-<input type="radio" name="parking_status" value="0"?/>No</br>
-<form action="" method=post>
-<label>Wybierz typ pokoju</label>
 
-<input type="radio" name="room_type" value="Standard"?/>Standard
-<input type="radio" name="room_type" value="Family"?/>Family
-<input type="radio" name="room_type" value="Single"?/>Single
-<?php
-$Standard=350;
-$Family=500;
-$Single=250;
- ?>
-</form>
-<form method="post">
-    <input type="submit" name="test" id="test" value="RUN" /><br/>
-</form>
 
-<?php
 
-function testfun()
-{
-   echo "Your test function on button click is working";
-}
-
-if(array_key_exists('test',$_POST)){
-   testfun();
-}
-
-?>
- <button type="submit" class="btn btn-primary">Dodaj</button>
-
-</form>
-
-            <div>
-            </div>
-            </form>
-
-            <script type="text/javascript">
-            function validateForm() {
-            if (isEmpty(document.getElementById('data_2').value.trim())) {
-            alert('First name is required!');
-            return false;
-            }
-            if (isEmpty(document.getElementById('data_3').value.trim())) {
-            alert('Last name is required!');
-            return false;
-            }
-            if (isEmpty(document.getElementById('data_4').value.trim())) {
-            alert('Phone is required!');
-            return false;
-            }
-            if (isEmpty(document.getElementById('data_5').value.trim())) {
-            alert('Email is required!');
-            return false;
-            }
-            if (!validateEmail(document.getElementById('data_5').value.trim())) {
-            alert('Email must be a valid email address!');
-            return false;
-            }
-            if (isEmpty(document.getElementById('data_6').value.trim())) {
-            alert('Arrival date is required!');
-            return false;
-            }
-            if (isEmpty(document.getElementById('data_7').value.trim())) {
-            alert('Departure date is required!');
-            return false;
-            }
-            if (isEmpty(document.getElementById('data_8').value.trim())) {
-            alert('Number of adults is required!');
-            return false;
-            }
-            return true;
-            }
-            function isEmpty(str) { return (str.length === 0 || !str.trim()); }
-            function validateEmail(email) {
-            var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,15}(?:\.[a-z]{2})?)$/i;
-            return isEmpty(email) || re.test(email);
-            }
-            </script>
+          @if (Route::has('login'))
+        @auth
+        @else
+            <a style="margin-left: 30px" href="{{ route('login') }} " class="btn btn-dark" role="button" aria-disabled="true">Book Now</a>
+        @endauth
+@endif
           </div>
         </div>
-
-
-<p>Wszystkie pokoje Delux wyposażone są w dwa oddzielne łóżka z możliwością komfortowego łączenia, łazienkę z kabiną prysznicową, toaletą i umywalką, kanapę, biurko do pracy, klimatyzację, TV SAT, minibar, sejf oraz nieograniczony dostęp do hotelowej sieci HOT SPOT. Pokoje zlokalizowane są na parterze oraz pierwszym piętrze, a dla wygody naszych Gości dostępna jest winda. Dzięki klasycznej elegancji i niepowtarzalnej atmosferze pokoje zapewniają idealne warunki do pracy i wypoczynku.</p>
+        <p>The room with especially elegant furniture. It is equipped with marital bed and comfortable sofa for rest, and due to that it can be easily used as one- two- or three-person room.
       </div>
     </div>
 

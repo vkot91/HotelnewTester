@@ -66,8 +66,8 @@ class CategoryController extends Controller
         if (! Gate::allows('category_edit')) {
             return abort(401);
         }
-        $category = Category::findOrFail($id);
-        $category->update($request->all());
+        $categories = Category::findOrFail($id);
+        $categories->update($request->all());
 
 
 
@@ -86,8 +86,8 @@ class CategoryController extends Controller
         if (!Gate::allows('category_delete')) {
             return abort(401);
         }
-        $booking = Category::findOrFail($id);
-        $booking->delete();
+        $categories = Category::findOrFail($id);
+        $categories->delete();
 
         return redirect()->route('admin.categories.index');
     }
@@ -99,7 +99,7 @@ class CategoryController extends Controller
      */
     public function massDestroy(Request $request)
     {
-        if (!Gate::allows('booking_delete')) {
+        if (!Gate::allows('category_delete')) {
             return abort(401);
         }
         if ($request->input('ids')) {
@@ -120,13 +120,13 @@ class CategoryController extends Controller
      */
     public function restore($id)
     {
-        if (!Gate::allows('booking_delete')) {
+        if (!Gate::allows('category_delete')) {
             return abort(401);
         }
-        $booking = Category::onlyTrashed()->findOrFail($id);
-        $booking->restore();
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category>restore();
 
-        return redirect()->route('admin.bookings.index');
+        return redirect()->route('admin.categories.index.');
     }
 
     /**
@@ -137,13 +137,13 @@ class CategoryController extends Controller
      */
     public function perma_del($id)
     {
-        if (!Gate::allows('booking_delete')) {
+        if (!Gate::allows('category_delete')) {
             return abort(401);
         }
-        $booking = Category::onlyTrashed()->findOrFail($id);
-        $booking->forceDelete();
+        $category = Category::onlyTrashed()->findOrFail($id);
+        $category->forceDelete();
 
-        return redirect()->route('admin.bookings.index');
+        return redirect()->route('admin.categories.index');
     }
 
 

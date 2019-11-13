@@ -6,10 +6,8 @@
     @can('booking_create')
     <p>
         <a href="{{ route('admin.bookings.create') }}" class="btn btn-success">@lang('quickadmin.qa_add_new')</a>
-
     </p>
     @endcan
-
     @can('booking_delete')
     <p>
         <ul class="list-inline">
@@ -42,7 +40,8 @@
                         <th>@lang('quickadmin.bookings.fields.time-from')</th>
                         <th>@lang('quickadmin.bookings.fields.time-to')</th>
                         <th>@lang('quickadmin.bookings.fields.additional-information')</th>
-
+                        <th>@lang('quickadmin.bookings.fields.diff_days')</th>
+                        <th>@lang('quickadmin.bookings.fields.all_price')</th>
 
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
@@ -69,6 +68,9 @@
                                 <td field-key='time_from'>{{ $booking->time_from }}</td>
                                 <td field-key='time_to'>{{ $booking->time_to }}</td>
                                 <td field-key='additional_information'>{!! $booking->additional_information !!}</td>
+                                <td field-key='diff_days'>{!! $booking->diff_days  !!}</td>
+                                <td field-key='all_price'>{!! $booking->all_price  !!}</td>
+
                                 @if( request('show_deleted') == 1 )
                                 <td>
                                     @can('booking_delete')

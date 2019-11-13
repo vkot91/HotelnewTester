@@ -75,7 +75,7 @@
                       @if (Route::has('login'))
 
                     @auth
-                        <li><a href="{{ url('/home') }}">Konto</a></li>
+                        <li><a href="{{ url('/home') }}">Account</a></li>
                     @else
                         <li><a href="{{ route('login') }}">Login</a></li>
 
@@ -100,7 +100,7 @@
         <div class="container">
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7 text-center" data-aos="fade">
-              <span class="caption mb-3">Suites Hotel &amp; Resort</span>
+              <span class="caption mb-3">Kompass Hotel &amp; Resort</span>
               <h1 class="mb-4">About Us</h1>
             </div>
           </div>

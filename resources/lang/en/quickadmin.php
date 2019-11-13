@@ -23,7 +23,8 @@ return [
 			'password' => 'Password',
 			'role' => 'Role',
 			'remember-token' => 'Remember token',
-            'user_id' => 'User ID'
+            'user_id' => 'User ID',
+            'avatar' =>'Avatar'
 		],
 	],
 
@@ -56,7 +57,8 @@ return [
 			'category' => 'Category',
 			'description' => 'Description',
             'actions' => 'Actions',
-            'user' =>'User ID and Name'
+            'user' =>'User ID and Name',
+            'price' =>'Price Per Day',
 		],
 	],
 
@@ -73,7 +75,9 @@ return [
 			'time-from' => 'Time from',
 			'time-to' => 'Time to',
 			'additional-information' => 'Additional information',
-            'user_id' => 'User ID'
+            'user_id' => 'User ID',
+            'diff_days' =>'Nights',
+            'all_price' =>'Total price',
 		],
 	],
 
@@ -85,7 +89,6 @@ return [
         'book_room' => 'Book room',
     ],
 	'qa_create' => 'Create',
-
 	'qa_save' => 'Save',
 	'qa_edit' => 'Edit',
 	'qa_restore' => 'Restore',

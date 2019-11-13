@@ -132,7 +132,30 @@
                     @endif
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('diff_days', trans('quickadmin.bookings.fields.diff_days').'*', ['class' => 'control-label']) !!}
+                    {!! Form::number('diff_days', old('diff_days'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('diff_days'))
+                        <p class="help-block">
+                            {{ $errors->first('diff_days') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('all_price', trans('quickadmin.bookings.fields.all_price').'*', ['class' => 'control-label']) !!}
+                    {!! Form::number('all_price', old('all_price'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('all_price'))
+                        <p class="help-block">
+                            {{ $errors->first('all_price') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 

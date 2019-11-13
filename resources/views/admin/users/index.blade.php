@@ -28,6 +28,7 @@
                         <th>@lang('quickadmin.users.fields.name')</th>
                         <th>@lang('quickadmin.users.fields.email')</th>
                         <th>@lang('quickadmin.users.fields.role')</th>
+                        <th>@lang('quickadmin.users.fields.avatar')</th>
                                                 <th>&nbsp;</th>
 
                     </tr>
@@ -45,7 +46,10 @@
 
                                 <td field-key='email'>{{ $user->email }}</td>
                                 <td field-key='role'>{{ $user->role->title or '' }}</td>
-                                                                <td>
+                                    <td field-key ='avatar'> <img src="/images/avatars/{{$user->avatar}}" style = "width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;"  alt="Oleg Lox">
+                                    </td>
+                                    </td>
+                                    <td>
                                     @can('user_view')
                                     <a href="{{ route('admin.users.show',[$user->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
                                     @endcan

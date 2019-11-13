@@ -3,7 +3,8 @@
 
     <style>
         body{
-            background-image:url('images/hero_1.jpg')
+            background-image:url('images/hero_1.jpg');
+            background-repeat: no-repeat;
         }
     </style>
 <div class="container">

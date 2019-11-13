@@ -28,6 +28,7 @@ class UpdateRoomsRequest extends FormRequest
             'floor' => 'max:2147483647|required|numeric',
             'description' => 'required',
             'category_id' =>'required',
+            'price'=>'required',
         ];
     }
 }

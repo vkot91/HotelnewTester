@@ -48,6 +48,16 @@
                             <th>@lang('quickadmin.bookings.fields.additional-information')</th>
                             <td field-key='additional_information'>{!! $booking->additional_information !!}</td>
                         </tr>
+                        <tr>
+                            <th>@lang('quickadmin.bookings.fields.diff_days')</th>
+                            <td field-key='nights'>{!! $booking->diff_days  !!}</td>
+                        </tr>
+                    <tr>
+                        <th>@lang('quickadmin.bookings.fields.all_price')</th>
+                        <td field-key='total'>{!! $booking->all_price  !!}</td>
+                    </tr>
+
+
 
                     </table>
                 </div>

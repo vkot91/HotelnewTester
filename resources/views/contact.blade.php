@@ -77,7 +77,7 @@
                       @if (Route::has('login'))
 
                     @auth
-                        <li><a href="{{ url('/home') }}">Konto</a></li>
+                        <li><a href="{{ url('/home') }}">Account</a></li>
                     @else
                         <li><a href="{{ route('login') }}">Login</a></li>
 
@@ -115,21 +115,34 @@
         <div class="row">
 
           <div class="col-md-12 col-lg-8 mb-5">
+            @if(count($errors)>0)
+                    <div class="alert alert-danger">
+                      <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                          @endforeach
+                      </ul>
+                    </div>
 
+            @endif
 
-
-            <form action="#" class="p-5 bg-white">
-
+            @if($message = Session::get('success'))
+                <div class="alert alert-danger">
+                  <button data-dismmis="alert" class="close" type="button">x</button>
+                  <strong>{{$message}}</strong>
+              @endif
+            <form method="POST" class="p-5 bg-white" action="{{url('sendemail/send')}}">
+              {{csrf_field()}}
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Full Name</label>
-                  <input type="text" id="fullname" class="form-control" placeholder="Full Name">
+                  <label class="font-weight-bold" for="name">Full Name</label>
+                  <input type="text" id="name" name="name" class="form-control" placeholder="Full Name">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12">
                   <label class="font-weight-bold" for="email">Email</label>
-                  <input type="email" id="email" class="form-control" placeholder="Email Address">
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email Address">
                 </div>
               </div>
 
@@ -137,7 +150,7 @@
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="font-weight-bold" for="phone">Phone</label>
-                  <input type="text" id="phone" class="form-control" placeholder="Phone #">
+                  <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone #">
                 </div>
               </div>
 
@@ -150,11 +163,9 @@
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Send Message" class="btn btn-primary pill px-4 py-2">
+                  <input type="submit" name="send" value="Send" class="btn btn-primary pill px-4 py-2">
                 </div>
               </div>
-
-
             </form>
           </div>
 
@@ -186,6 +197,7 @@
 
 
         <div class="row">
+
           <div class="col-md-4">
             <h3 class="footer-heading mb-4 text-white">About</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat quos rem ullam, placeat amet.</p>
@@ -251,6 +263,8 @@
                 }
             });
     </script>
+  <script>
 
+  </script>
   </body>
 </html>

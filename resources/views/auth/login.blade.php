@@ -5,16 +5,12 @@
         body
         {
             background-image:url('images/hero_1.jpg');
-            background-size: cover;
-
+            background-repeat: no-repeat;
         }
-        .panel-body{
-            background: transparent;
-        }
-
     </style>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
+
             <div class="panel panel-default">
                 <div class="panel-heading">{{ ucfirst(config('app.name')) }} @lang('quickadmin.qa_login')</div>
                 <div class="panel-body">
@@ -32,9 +28,11 @@
                     @endif
 
                     <form class="form-horizontal"
+
                           role="form"
                           method="POST"
                           action="{{ url('login') }}">
+
                         <input type="hidden"
                                name="_token"
                                value="{{ csrf_token() }}">
@@ -73,14 +71,18 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit"
-                                        class="btn btn-primary"
-                                        style="margin-right: 15px;">
-                                    @lang('quickadmin.qa_login')
-                                </button>
-                            </div>
+                        <div class="col-md-6 col-md-offset-4">
+                            <button type="submit"
+                                    class="btn btn-primary"
+                                    style="margin-right: 15px;">
+                                @lang('quickadmin.qa_login')
+                            </button>
+
                         </div>
+                </div>
+
+
+
                     </form>
                 </div>
             </div>

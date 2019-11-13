@@ -17,12 +17,15 @@ class Create1516728224BookingsTable extends Migration
                 $table->increments('id');
                 $table->datetime('time_from')->nullable();
                 $table->datetime('time_to')->nullable();
+                $table->integer('diff_days')->nullable();
                 $table->text('additional_information')->nullable();
                 $table->string('first_name');
                 $table->string('last_name');
                 $table->string('address')->nullable();
                 $table->string('phone')->nullable();
                 $table->string('email');
+                $table->integer('all_price')->nullable();
+
 
                 $table->timestamps();
                 $table->softDeletes();

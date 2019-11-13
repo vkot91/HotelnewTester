@@ -83,6 +83,8 @@
                     @endif
                 </div>
             </div>
+
+
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('time_from', trans('quickadmin.bookings.fields.time-from').'*', ['class' => 'control-label']) !!}
@@ -119,14 +121,13 @@
                     @endif
                 </div>
             </div>
-
-
         </div>
     </div>
 
     {!! Form::submit(trans('quickadmin.qa_save'),['class' => 'btn btn-danger'])!!}
 
     {!! Form::close() !!}
+
 
 @stop
 
@@ -141,10 +142,7 @@
             format: "YYYY-MM-DD HH:mm"
 
         });
-        document.getElementById('click').onclick = function () {
-            alert('Hello world');
 
-        }
 
     </script>
 @stop

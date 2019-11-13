@@ -2,6 +2,7 @@
 
 namespace App;
 
+use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,7 +21,7 @@ class Booking extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['time_from', 'time_to', 'additional_information', 'room_id','first_name', 'last_name', 'address', 'phone', 'email','user_id'];
+    protected $fillable = ['time_from', 'time_to', 'diff_days','additional_information', 'room_id','first_name', 'last_name', 'address', 'phone', 'email','user_id','all_price'];
     /**
      * Set to null if empty
      * @param $input
@@ -117,4 +118,17 @@ class Booking extends Model
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    public function diff(Request $request)
+    {
+        $start_time = \Carbon\Carbon::parse($request->input('time_from'));
+        $finish_time = \Carbon\Carbon::parse($request->input('time_to'));
+        $diff_days = $start_time->diffInDays($finish_time, false);
+        $this->attributes['diff_days'] = $diff_days;
+        return $diff_days;
+    }
+
+
+
+
 }

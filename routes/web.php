@@ -1,11 +1,19 @@
 <?php
+use Carbon\Carbon;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/profile','UserController@profile');
+Route::post('/profile','UserController@update_avatar');
+Route::get('/sendemail','SendMailController@index');
+Route::post('/sendemail/send','SendMailController@send');
 Route::post('/',function()
 {
 
 });
+
+
 
 // Authentication Routes...
 Auth::routes();
@@ -22,15 +30,15 @@ $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('auth.password.reset');
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
-
+Route::get('/home','Admin\UsersController@profile')->name('home');
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/home', 'HomeController@index');
+
 
     Route::resource('roles', 'Admin\RolesController');
     Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
-
     Route::resource('categories', 'Admin\CategoryController');
     Route::post('categories_mass_destroy', ['uses' => 'Admin\CategoryController@massDestroy', 'as' => 'categories.mass_destroy']);
     Route::post('categories_restore/{id}', ['uses' => 'Admin\CategoryController@restore', 'as' => 'categories.restore']);
@@ -82,23 +90,15 @@ Route::get('rooms', function () {
     return view('rooms');
 });
 Route::get('singleroom', function () {
-    return view('singleroom');
+    return view('rooms/singleroom');
 });
 Route::get('familyroom', function () {
-    return view('familyroom');
+    return view('rooms/familyroom');
 });
 Route::get('standardroom', function () {
-    return view('standardroom');
-});
-Route::get('stdroomreserv', function () {
-    return view('stdroomreserv');
+    return view('rooms/standardroom');
 });
 
 
-Route::get('sngroomreserv', function () {
-    return view('sngroomreserv');
-});
-Route::get('fmlroomreserv', function () {
-    return view('fmlroomreserv');
-});
+
 
