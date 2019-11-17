@@ -6,40 +6,67 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 
-
+use App\Room;
 use App\Category;
 use App\Http\Requests\Admin\UpdateCategoriesRequest;
 use App\Http\Requests\Admin\StoreCategoriesRequest;
 
-class CategoryController extends Controller
+class CategoriesController extends Controller
 {
+    /**
+     * Display a listing of Category.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $categories=Category::all();
+        if (! Gate::allows('category_access')) {
+            return abort(401);
+        }
+
+
+        $categories = Category::all();
+
         return view('admin.categories.index', compact('categories'));
     }
 
+
+    /**
+     * Show the form for creating new Category.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
     public function create()
     {
-        //show template
+        if (! Gate::allows('category_create')) {
+            return abort(401);
+        }
         return view('admin.categories.create');
     }
+
+    /**
+     * Store a newly created Category in storage.
+     *
+     * @param  \App\Http\Requests\StoreCategoriesRequest  $request
+     * @return \Illuminate\Http\Response
+     */
 
     public function store(StoreCategoriesRequest $request)
     {
         if (! Gate::allows('category_create')) {
             return abort(401);
         }
+        $category = Category::create($request->all());
 
-        $category = Category::create([
-            'name'=> $request->name
-        ]);
-        return redirect('/admin/categories');
+
+
+        return redirect()->route('admin.categories.index');
 
     }
 
     /**
-     * Show the form for editing category.
+     * Show the form for editing Category.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -50,7 +77,6 @@ class CategoryController extends Controller
             return abort(401);
         }
         $category = Category::findOrFail($id);
-
         return view('admin.categories.edit', compact('category'));
     }
 
@@ -66,16 +92,30 @@ class CategoryController extends Controller
         if (! Gate::allows('category_edit')) {
             return abort(401);
         }
-        $categories = Category::findOrFail($id);
-        $categories->update($request->all());
-
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
 
 
         return redirect()->route('admin.categories.index');
     }
 
-
     /**
+     * Display Role.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        if (!Gate::allows('category_view')) {
+            return abort(401);
+        }
+        $category = Category::findOrFail($id);
+        return view('admin.categories.show', compact('category'));
+
+
+    }
+        /**
      * Remove Booking from storage.
      *
      * @param  int $id
@@ -86,8 +126,8 @@ class CategoryController extends Controller
         if (!Gate::allows('category_delete')) {
             return abort(401);
         }
-        $categories = Category::findOrFail($id);
-        $categories->delete();
+        $category = Category::findOrFail($id);
+        $category->delete();
 
         return redirect()->route('admin.categories.index');
     }
@@ -124,7 +164,7 @@ class CategoryController extends Controller
             return abort(401);
         }
         $category = Category::onlyTrashed()->findOrFail($id);
-        $category>restore();
+        $category->restore();
 
         return redirect()->route('admin.categories.index.');
     }

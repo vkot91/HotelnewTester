@@ -1,91 +1,98 @@
-@extends('layouts.auth')
 
+
+@extends('layouts.login')
+<style>
+    body{
+        background-image:url('../images/hero_1.jpg') ;
+    }
+</style>
 @section('content')
-    <style>
-        body
-        {
-            background-image:url('images/hero_1.jpg');
-            background-repeat: no-repeat;
-        }
-    </style>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+    <div class="limiter">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>@lang('quickadmin.qa_whoops')</strong> @lang('quickadmin.qa_there_were_problems_with_input'):
+                <br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="container-login">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ ucfirst(config('app.name')) }} @lang('quickadmin.qa_login')</div>
-                <div class="panel-body">
+            <div class="wrap-login">
 
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>@lang('quickadmin.qa_whoops')</strong> @lang('quickadmin.qa_there_were_problems_with_input'):
-                            <br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                <div class="login-pic">
+                    <img src='../images/img-01.png' alt="">
+                </div>
+                <form class="form-horizontal login-form"
+                      role="form"
+                      method="POST"
+                      action="{{ url('login') }}">
+ <span class="login-form-title">
+ Member Login
+ </span>
+
+                    <input type="hidden"
+                           name="_token"
+                           value="{{ csrf_token() }}">
+
+                    @if($message = Session::get('success'))
+                        <div class="alert alert-warning">
+                            <p>{{$message}}</p>
                         </div>
                     @endif
-
-                    <form class="form-horizontal"
-
-                          role="form"
-                          method="POST"
-                          action="{{ url('login') }}">
-
-                        <input type="hidden"
-                               name="_token"
-                               value="{{ csrf_token() }}">
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">@lang('quickadmin.qa_email')</label>
-
-                            <div class="col-md-5">
-                                <input type="email"
-                                       class="form-control"
-                                       name="email"
-                                       value="{{ old('email') }}">
-                            </div>
+                    @if($message = Session::get('warning'))
+                        <div class="alert alert-warning">
+                            <p>{{$message}}</p>
                         </div>
+                    @endif
+                    <div class="wrap-input">
+                        <input type="email"
+                               class="form-control input"
+                               name="email"
+                               value="{{ old('email') }}">
+                        <span class="focus-input"></span>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">@lang('quickadmin.qa_password')</label>
+                        <span class="symbol-input">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+                    </div>
 
-                            <div class="col-md-5">
-                                <input type="password"
-                                       class="form-control"
-                                       name="password">
-                            </div>
-                        </div>
+                    <div class="wrap-input">
+                        <input type="password"
+                               class="form-control input"
+                               name="password"
+                               value="{{ old('password') }}">
+                        <span class="focus-input"></span>
 
+                        <span class="symbol-input">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                    </div>
+                    <div class="text-center p-t-12">
+                        <a class = "txt2"  href="{{ route('auth.password.reset') }}">@lang('quickadmin.qa_forgot_password')</a>
 
+                    </div>
 
+                    <div class="container-login-form-btn">
+                        <button type="submit"  class="login-form-btn">
+                            @lang('quickadmin.qa_login')
+                        </button>
+                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <label>
-                                    <input type="checkbox"
-                                           name="remember"> @lang('quickadmin.qa_remember_me')
-                                </label>
-                            </div>
-                        </div>
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="{{route('register')}}">
+                            @lang('quickadmin.qa_create_account')
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
 
-                        <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit"
-                                    class="btn btn-primary"
-                                    style="margin-right: 15px;">
-                                @lang('quickadmin.qa_login')
-                            </button>
-
-                        </div>
-                </div>
-
-
-
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
     </div>
+
+
 @endsection

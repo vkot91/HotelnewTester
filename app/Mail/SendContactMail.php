@@ -7,17 +7,17 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SenMail extends Mailable
+class SendContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-
-    public $data;
     /**
      * Create a new message instance.
      *
      * @return void
      */
+    public $data;
+
     public function __construct($data)
     {
         $this->data = $data;
@@ -30,6 +30,6 @@ class SenMail extends Mailable
      */
     public function build()
     {
-        return $this->from('example@gmail.com')->subject('New Customer Equiry')->view('dynamic_email_template')->with('data',$this->data);
+        return $this->from('example@gmail.com')->subject('Contact Message:')->view('mail.contact_mail')->with('data',$this->data);
     }
 }

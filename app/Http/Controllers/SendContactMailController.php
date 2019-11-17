@@ -4,16 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SenMail;
-
-class SendMailController extends Controller
+use App\Mail\SendContactMail;
+class SendContactMailController extends Controller
 {
-    //
     function index()
     {
         return view('contact');
     }
-
     function send(Request $request)
     {
         $this->validate($request,[
@@ -23,13 +20,12 @@ class SendMailController extends Controller
             'message'=>'required',
         ]);
         $data =  array(
-          'name'=>$request->name,
-          'email'=>$request->email,
-          'phone'=>$request->phone,
-          'message'=>$request->message,
-
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'message'=>$request->message,
         );
-        Mail::to('kompassproject@gmail.com')->send(new SenMail($data));
+        Mail::to('kompassproject@gmail.com')->send(new SendContactMail($data));
         return back()->with('success','Thanks for contacting us!');
     }
 }

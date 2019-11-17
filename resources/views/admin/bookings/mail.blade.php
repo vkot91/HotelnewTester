@@ -1,0 +1,174 @@
+@extends('layouts.app')
+
+@section('content')
+    <h3 class="page-title">@lang('quickadmin.bookings.title')</h3>
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @lang('quickadmin.qa_mail')
+        </div>
+        {!! Form::model($booking,['url' => 'send-mail', $booking->id]) !!}
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('first_name', trans('quickadmin.bookings.fields.first_name').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('first_name', old('first_name'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('first_name'))
+                        <p class="help-block">
+                            {{ $errors->first('first_name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('last_name', trans('quickadmin.bookings.fields.last_name').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('last_name', old('last_name'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('last_name'))
+                        <p class="help-block">
+                            {{ $errors->first('last_name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('address', trans('quickadmin.bookings.fields.address').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('address', old('address'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('address'))
+                        <p class="help-block">
+                            {{ $errors->first('address') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('phone', trans('quickadmin.bookings.fields.phone').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('phone', old('address'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('phone'))
+                        <p class="help-block">
+                            {{ $errors->first('phone') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('email', trans('quickadmin.bookings.fields.email').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('email', old('email'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('email'))
+                        <p class="help-block">
+                            {{ $errors->first('email') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('room_id', trans('quickadmin.bookings.fields.room').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('room_id', $rooms, old('room_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('room_id'))
+                        <p class="help-block">
+                            {{ $errors->first('room_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('time_from', trans('quickadmin.bookings.fields.time-from').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('time_from', old('time_from'), ['class' => 'form-control datetimepicker', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('time_from'))
+                        <p class="help-block">
+                            {{ $errors->first('time_from') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('time_to', trans('quickadmin.bookings.fields.time-to').'*', ['class' => 'control-label']) !!}
+                    {!! Form::text('time_to', old('time_to'), ['class' => 'form-control datetimepicker', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('time_to'))
+                        <p class="help-block">
+                            {{ $errors->first('time_to') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('diff_days', trans('quickadmin.bookings.fields.diff_days').'*', ['class' => 'control-label']) !!}
+                    {!! Form::number('diff_days', old('diff_days'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('diff_days'))
+                        <p class="help-block">
+                            {{ $errors->first('diff_days') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('all_price', trans('quickadmin.bookings.fields.all_price').'*', ['class' => 'control-label']) !!}
+                    {!! Form::number('all_price', old('all_price'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('all_price'))
+                        <p class="help-block">
+                            {{ $errors->first('all_price') }}
+                        </p>
+                    @endif
+    </div>
+    </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('additional_information', trans('quickadmin.bookings.fields.additional-information').'*', ['class' => 'control-label']) !!}
+                    {!! Form::textarea('additional_information', old('additional_information'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('additional_information'))
+                        <p class="help-block">
+                            {{ $errors->first('additional_information') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group row mb-0">
+                <div class="col-md-8 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+       {!! Form::close() !!}
+        </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+
+@stop
+
+@section('javascript')
+    @parent
+    <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        $('.datetimepicker').datetimepicker({
+            format: "YYYY-MM-DD HH:mm"
+        });
+    </script>
+@stop

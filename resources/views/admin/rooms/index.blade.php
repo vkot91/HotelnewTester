@@ -37,7 +37,7 @@
                         <th>@lang('quickadmin.rooms.fields.floor')</th>
                         <th>@lang('quickadmin.rooms.fields.description')</th>
                         <th>@lang('quickadmin.rooms.fields.category')</th>
-                        <th>@lang('quickadmin.rooms.fields.price')</th>
+                            <th>@lang('quickadmin.rooms.fields.price')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else

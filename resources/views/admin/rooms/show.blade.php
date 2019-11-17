@@ -61,7 +61,7 @@
                         @if (count($bookings) > 0)
                             @foreach ($bookings as $booking)
                                 <tr data-entry-id="{{ $booking->id }}">
-                                    <td field-key='user'>{{ $booking->user->id or '' }}  .  {{ $booking->user->name or '' }}</td>
+                                    <td field-key='user'>{{ $booking->user->id or '' }}  . {{ $booking->user->name or '' }}</td>
                                     <td field-key='room'>{{ $booking->room->room_number or '' }}</td>
                                     <td field-key='time_from'>{{ $booking->time_from }}</td>
                                     <td field-key='time_to'>{{ $booking->time_to }}</td>

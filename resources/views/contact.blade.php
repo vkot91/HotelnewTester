@@ -126,12 +126,14 @@
 
             @endif
 
-            @if($message = Session::get('success'))
-                <div class="alert alert-danger">
-                  <button data-dismmis="alert" class="close" type="button">x</button>
-                  <strong>{{$message}}</strong>
-              @endif
+
             <form method="POST" class="p-5 bg-white" action="{{url('sendemail/send')}}">
+              @if($message = Session::get('success'))
+                <div class="alert alert-success">
+
+                  <p>{{$message}}</p>
+                </div>
+                  @endif
               {{csrf_field()}}
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">

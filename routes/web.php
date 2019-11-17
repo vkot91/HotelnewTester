@@ -6,13 +6,8 @@ Route::get('/', function () {
 
 Route::get('/profile','UserController@profile');
 Route::post('/profile','UserController@update_avatar');
-Route::get('/sendemail','SendMailController@index');
-Route::post('/sendemail/send','SendMailController@send');
-Route::post('/',function()
-{
 
-});
-
+Route::post('/sendemail/send','SendContactMailController@send');
 
 
 // Authentication Routes...
@@ -20,7 +15,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 $this->post('logout', 'Auth\LoginController@logout')->name('auth.logout');
-
+//Register
+Route::get('/user/activation/{token}','Auth\RegisterController@userActivation');
 // Change Password Routes...
 $this->get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');
 $this->patch('change_password', 'Auth\ChangePasswordController@changePassword')->name('auth.change_password');
@@ -35,14 +31,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/home', 'HomeController@index');
 
 
+
+
     Route::resource('roles', 'Admin\RolesController');
     Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
-    Route::resource('categories', 'Admin\CategoryController');
-    Route::post('categories_mass_destroy', ['uses' => 'Admin\CategoryController@massDestroy', 'as' => 'categories.mass_destroy']);
-    Route::post('categories_restore/{id}', ['uses' => 'Admin\CategoryController@restore', 'as' => 'categories.restore']);
-    Route::delete('categories_perma_del/{id}', ['uses' => 'Admin\CategoryController@perma_del', 'as' => 'categories.perma_del']);
+    Route::resource('categories', 'Admin\CategoriesController');
+    Route::post('categories_mass_destroy', ['uses' => 'Admin\CategoriesController@massDestroy', 'as' => 'categories.mass_destroy']);
+    Route::post('categories_restore/{id}', ['uses' => 'Admin\CategoriesController@restore', 'as' => 'categories.restore']);
+    Route::delete('categories_perma_del/{id}', ['uses' => 'Admin\CategoriesController@perma_del', 'as' => 'categories.perma_del']);
 
     Route::resource('rooms', 'Admin\RoomsController');
     Route::post('rooms_mass_destroy', ['uses' => 'Admin\RoomsController@massDestroy', 'as' => 'rooms.mass_destroy']);
@@ -55,7 +53,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
    Route::post('bookings_mass_destroy', ['uses' => 'Admin\BookingsController@massDestroy', 'as' => 'bookings.mass_destroy']);
    Route::post('bookings_restore/{id}', ['uses' => 'Admin\BookingsController@restore', 'as' => 'bookings.restore']);
    Route::delete('bookings_perma_del/{id}', ['uses' => 'Admin\BookingsController@perma_del', 'as' => 'bookings.perma_del']);
-
+   Route::get('{id}/mail/', ['uses' => 'Admin\BookingsController@mail', 'as' => 'bookings.mail']);
 
     //Route::resource('/find_rooms', 'Admin\FindRoomsController', ['except' => 'create']);
     Route::get('/find_rooms', 'Admin\FindRoomsController@index')->name('find_rooms.index');
@@ -65,15 +63,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
         'uses' => 'Admin\BookingsController@create'
     ]);*/
 });
+
+Route::post('send-mail','Admin\BookingsController@sendemail');
+
 Route::group(['middleware' => ['auth'], 'prefix' => 'user', 'as' => 'user.'], function () {
     Route::resource('bookings', 'Admin\UserBookingController', ['except' => 'bookings.create']);
-    Route::get('bookings/create/', ['as' => 'bookings.create', 'uses' => 'Admin\UserBookingControllerr@create']);
-    Route::post('bookings_mass_destroy', ['uses' => 'Admin\UserBookingController@massDestroy', 'as' => 'bookings.mass_destroy']);
-    Route::post('bookings_restore/{id}', ['uses' => 'Admin\UserBookingController@restore', 'as' => 'bookings.restore']);
-    Route::delete('bookings_perma_del/{id}', ['uses' => 'Admin\UserBookingController@perma_del', 'as' => 'bookings.perma_del']);
-
-
 });
+
+
 Route::get('events', function () {
     return view('user.index');
 });
@@ -89,6 +86,7 @@ Route::get('contact', function () {
 Route::get('rooms', function () {
     return view('rooms');
 });
+
 Route::get('singleroom', function () {
     return view('rooms/singleroom');
 });
@@ -98,6 +96,8 @@ Route::get('familyroom', function () {
 Route::get('standardroom', function () {
     return view('rooms/standardroom');
 });
+
+
 
 
 

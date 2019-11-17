@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Booking;
+use App\Mail\SendMail;
 use App\Room;
 use App\User;
 use Carbon\Carbon;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBookingsRequest;
 use App\Http\Requests\Admin\UpdateBookingsRequest;
+use Illuminate\Support\Facades\Mail;
 
 class BookingsController extends Controller
 {
@@ -43,7 +45,7 @@ class BookingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         if (!Gate::allows('booking_create')) {
             return abort(401);
@@ -53,6 +55,8 @@ class BookingsController extends Controller
         $rooms = Room::get()->pluck('room_number', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
         $users = User::get()->pluck('id','id')->prepend(trans('quickadmin.qa_please_select'),'');
         $rooms2 = Room::get()->pluck('price', 'id');
+        $time_from = $request->input('time_from');
+        $time_to = $request->input('time_to');
 
         return view('admin.bookings.create', compact('rooms','users','rooms2'));
     }
@@ -167,6 +171,20 @@ class BookingsController extends Controller
         }
     }
 
+    public function mail($id)
+    {
+        if (!Gate::allows('booking_mail')) {
+            return abort(401);
+        }
+
+
+        $rooms = Room::get()->pluck('room_number', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $users = User::get()->pluck('id','id')->prepend(trans('quickadmin.qa_please_select'),'');
+        $booking = Booking::findOrFail($id);
+
+        return view('admin.bookings.mail', compact('booking', 'rooms','users'));
+    }
+
 
     /**
      * Restore Booking from storage.
@@ -201,10 +219,36 @@ class BookingsController extends Controller
 
         return redirect()->route('admin.bookings.index');
     }
-    public function diff(Request $request)
+
+    public function sendemail(Request $get)
     {
-        $start_time = \Carbon\Carbon::parse($request->input('time_from'));
-        $finish_time = \Carbon\Carbon::parse($request->input('time_to'));
-        $diff_days = $start_time->diffInDays($finish_time, false);
-    }
+
+        $this->validate($get,[
+            'first_name' =>'required',
+            'last_name' =>'required',
+            'address' =>'required',
+            'phone' =>'required',
+            'email'=>'required | email',
+            'room_id' =>'required',
+            'time_from' =>'required',
+            'time_to' =>'required',
+            'additional_information' =>'required',
+            'all_price' =>'required',
+
+        ]);
+
+            $first_name = $get->first_name;
+            $last_name = $get->last_name;
+            $address = $get->address;
+            $phone = $get -> phone;
+            $email = $get -> email;
+            $room_id = $get -> room_id;
+            $time_from = $get -> time_from;
+            $time_to = $get -> time_to;
+            $additional_information = $get -> additional_information;
+            $all_price = $get ->all_price;
+        Mail::to($email)->send(new SendMail( $first_name,$last_name,$address,$phone,$email, $room_id,$time_from,$time_to,$additional_information,$all_price));
+
+        return redirect()->route('admin.bookings.index');
+        }
 }

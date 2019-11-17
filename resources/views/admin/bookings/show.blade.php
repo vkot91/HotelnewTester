@@ -18,7 +18,7 @@
                         </tr>
                         <tr>
                             <th>@lang('quickadmin.bookings.fields.last_name')</th>
-                            <td field-key='last_name'>{{ $booking->last_name}}</td>
+                            <td name="oleg "field-key='last_name'>{{ $booking->last_name}}</td>
                         </tr>
                         <tr>
                             <th>@lang('quickadmin.bookings.fields.address')</th>

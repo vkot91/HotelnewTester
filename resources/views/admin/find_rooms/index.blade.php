@@ -9,7 +9,7 @@
             <div class="col-xs-9">
                 <div class="col-xs-6 form-group">
                     {!! Form::label('time_from', trans('quickadmin.bookings.fields.time-from').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('time_from', old('time_from'), ['class' => 'form-control datetimepicker', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::text('time_from', old('time_from'), ['class' => 'form-control datetimepicker', 'id'=>'datetimepicker1','placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('time_from'))
                         <p class="help-block">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-xs-6 form-group">
                     {!! Form::label('time_to', trans('quickadmin.bookings.fields.time-to').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('time_to', old('time_to'), ['class' => 'form-control datetimepicker', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::text('time_to', old('time_to'), ['class' => 'form-control datetimepicker','id'=>'datetimepicker2', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('time_to'))
                         <p class="help-block">
@@ -28,6 +28,7 @@
                     @endif
                 </div>
             </div>
+
             <div class="col-xs-2">
                 <div class="form-group" style="margin-top: 5px;">
                     <label class="control-label"></label>
@@ -50,6 +51,8 @@
                     <th>@lang('quickadmin.rooms.fields.room-number')</th>
                     <th>@lang('quickadmin.rooms.fields.floor')</th>
                     <th>@lang('quickadmin.rooms.fields.description')</th>
+                    <th>@lang('quickadmin.rooms.fields.category')</th>
+
                     <th>Price per Night</th>
                 </tr>
                 </thead>
@@ -60,6 +63,7 @@
                             <td field-key='room_number'>{{ $room->room_number }}</td>
                             <td field-key='floor'>{{ $room->floor }}</td>
                             <td field-key='description'>{!! $room->description !!}</td>
+                            <td field-key='category_id'>{{ $room->category->name or ''}}</td>
                             <td field-key='price'>{!! $room->price !!}</td>
                             <td>
                                 @can('booking_create')
@@ -90,4 +94,17 @@
             format: "YYYY-MM-DD HH:mm"
         });
     </script>
+    <script>
+        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker2').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker1").on("dp.change", function (e) {
+            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker2").on("dp.change", function (e) {
+            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+        });
+    </script>
+
 @stop

@@ -14,7 +14,7 @@
           <div class="row">
               <div class="col-xs-12 form-group">
                 {!! Form::label('first_name', trans('quickadmin.bookings.fields.first_name').'*', ['class' => 'control-label']) !!}
-                {!! Form::textarea('first_name', old('first_name'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                {!! Form::text('first_name', old('first_name'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
                 <p class="help-block"></p>
                  @if($errors->has('first_name'))
                      <p class="help-block">
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-xs-12 form-group">
                 {!! Form::label('last_name', trans('quickadmin.bookings.fields.last_name').'*', ['class' => 'control-label']) !!}
-                {!! Form::textarea('last_name', old('last_name'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                {!! Form::text('last_name', old('last_name'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
                 <p class="help-block"></p>
                 @if($errors->has('last_name'))
                     <p class="help-block">
@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-xs-12 form-group">
                 {!! Form::label('address', trans('quickadmin.bookings.fields.address').'*', ['class' => 'control-label']) !!}
-                {!! Form::textarea('address', old('address'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                {!! Form::text('address', old('address'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
                 <p class="help-block"></p>
                 @if($errors->has('address'))
                     <p class="help-block">
@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-xs-12 form-group">
                 {!! Form::label('phone', trans('quickadmin.bookings.fields.phone').'*', ['class' => 'control-label']) !!}
-                {!! Form::textarea('phone', old('address'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                {!! Form::text('phone', old('address'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
                 <p class="help-block"></p>
                 @if($errors->has('phone'))
                     <p class="help-block">
@@ -62,7 +62,7 @@
         <div class="row">
             <div class="col-xs-12 form-group">
                 {!! Form::label('email', trans('quickadmin.bookings.fields.email').'*', ['class' => 'control-label']) !!}
-                {!! Form::textarea('email', old('email'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                {!! Form::text('email', old('email'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
                 <p class="help-block"></p>
                 @if($errors->has('email'))
                     <p class="help-block">
@@ -120,18 +120,7 @@
                     @endif
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('additional_information', trans('quickadmin.bookings.fields.additional-information').'*', ['class' => 'control-label']) !!}
-                    {!! Form::textarea('additional_information', old('additional_information'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('additional_information'))
-                        <p class="help-block">
-                            {{ $errors->first('additional_information') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('diff_days', trans('quickadmin.bookings.fields.diff_days').'*', ['class' => 'control-label']) !!}
@@ -156,10 +145,23 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('additional_information', trans('quickadmin.bookings.fields.additional-information').'*', ['class' => 'control-label']) !!}
+                    {!! Form::textarea('additional_information', old('additional_information'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('additional_information'))
+                        <p class="help-block">
+                            {{ $errors->first('additional_information') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 
     {!! Form::submit(trans('quickadmin.qa_update'), ['class' => 'btn btn-danger']) !!}
+
     {!! Form::close() !!}
 @stop
 

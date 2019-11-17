@@ -67,9 +67,9 @@
                                 <td field-key='room'>{{ $booking->room->room_number or '' }}</td>
                                 <td field-key='time_from'>{{ $booking->time_from }}</td>
                                 <td field-key='time_to'>{{ $booking->time_to }}</td>
-                                <td field-key='additional_information'>{!! $booking->additional_information !!}</td>
-                                <td field-key='diff_days'>{!! $booking->diff_days  !!}</td>
-                                <td field-key='all_price'>{!! $booking->all_price  !!}</td>
+                                <td field-key='additional_information'>{{ $booking->additional_information }}</td>
+                                <td field-key='diff_days'>{{ $booking->diff_days  }}</td>
+                                <td field-key='all_price'>{{ $booking->all_price  }}</td>
 
                                 @if( request('show_deleted') == 1 )
                                 <td>
@@ -100,8 +100,11 @@
                                     @can('booking_edit')
                                     <a href="{{ route('admin.bookings.edit',[$booking->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
                                     @endcan
+                                        @can('booking_mail')
+                                            <a href="{{ route('admin.bookings.mail',[$booking->id]) }}" class="btn btn-xs btn-warning">@lang('Sent Mail')</a>
+                                        @endcan
                                     @can('booking_delete')
-{!! Form::open(array(
+                                        {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
@@ -109,6 +112,7 @@
                                     {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                     @endcan
+
                                 </td>
                                 @endif
                             </tr>

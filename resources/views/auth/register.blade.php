@@ -1,86 +1,135 @@
-@extends('layouts.app2')
+
+
+@extends('layouts.login')
+<style>
+    body{
+        background-image:url('../images/hero_1.jpg') ;
+    }
+</style>
 @section('content')
+    <div class="limiter">
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>@lang('quickadmin.qa_whoops')</strong> @lang('quickadmin.qa_there_were_problems_with_input'):
+                <br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <div class="container-login">
 
-    <style>
-        body{
-            background-image:url('images/hero_1.jpg');
-            background-repeat: no-repeat;
-        }
-    </style>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="wrap-login">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                    {{ csrf_field() }}
+                <div class="login-pic">
+                    <img src='../images/img-01.png' alt="">
+                </div>
+                <form class="form-horizontal login-form"
+                      role="form"
+                      method="POST"
+                      action="{{ route('register') }}">
+ <span class="login-form-title">
+ {{__('Register')}}
+ </span>
 
-                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                    <input type="hidden"
+                           name="_token"
+                           value="{{ csrf_token() }}">
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                    <div class="wrap-input">
+                        <input type="text"
+                               class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} input"
+                               name="name"
+                               value="{{ old('name') }}"
+                               required
+                               placeholder="Name"
+                               autofocus>
 
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
+                        @if ($errors->has('name'))
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                        @endif
+                        <span class="focus-input"></span>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
+                        <span class="symbol-input">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+                    </div>
+                    <div class="wrap-input">
+                        <input type="email"
+                               class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} input"
+                               name="email"
+                               placeholder="Email"
+                               value="{{ old('email') }}"
+                                required>
+                        @if ($errors->has('email'))
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                        @endif
+                        <span class="focus-input"></span>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <span class="symbol-input">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+                    </div>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                    <div class="wrap-input">
+                        <input type="password"
+                               class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} input"
+                               name="password"
+                               placeholder="Password"
+                               value="{{ old('password') }}"
+                        required>
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
+                        @if ($errors->has('password'))
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                        @endif
+                        <span class="focus-input"></span>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
+                        <span class="symbol-input">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                    </div>
 
 
+                    <div class="wrap-input">
+                        <input type="password"
+                               class="form-control input"
+                               name="password_confirmation"
+                               id = "password-confirm"
+                               placeholder="Confirm Password"
+                               required>
 
+                        <span class="focus-input"></span>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        <span class="symbol-input">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                    </div>
+
+                    <div class="container-login-form-btn">
+                        <button type="submit"  class="login-form-btn">
+                            @lang('quickadmin.qa_register')
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="{{route('login')}}">
+                            @lang('quickadmin.qa_back_to_login')
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
-</div>
+
+
 @endsection

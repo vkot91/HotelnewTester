@@ -33,6 +33,8 @@ class UpdateBookingsRequest extends FormRequest
             'time_to' => 'required|date_format:'.config('app.date_format').' H:i',
             'additional_information' => 'required',
             'user_id'=>'',
+            'diff_days'=>'',
+            'app_price'=>''
         ];
     }
 }

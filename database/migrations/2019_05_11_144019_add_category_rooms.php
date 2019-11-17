@@ -16,7 +16,7 @@ class AddCategoryRooms extends Migration
         Schema::table('rooms', function (Blueprint $table) {
             $table->integer('category_id')->unsigned()->nullable();
 
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id','110461_55676fa239ffd')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

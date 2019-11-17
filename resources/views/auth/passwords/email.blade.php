@@ -1,18 +1,29 @@
-@extends('layouts.auth')
+
+
+@extends('layouts.login')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset password</div>
-                <div class="panel-body">
+    <div class="limiter">
 
+        <div class="container-login">
+
+            <div class="wrap-login">
+
+                <div class="login-pic">
+                    <img src='../images/img-01.png' alt="">
+                </div>
+                <form class="form-horizontal login-form"
+                      role="form"
+                      method="POST"
+                      action="{{ url('password/email') }}">
+ <span class="login-form-title">
+						Enter your Email
+					        </span>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
-
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> There were problems with input:
@@ -24,38 +35,40 @@
                             </ul>
                         </div>
                     @endif
+                    <input type="hidden"
+                           name="_token"
+                           value="{{ csrf_token() }}">
 
-                    <form class="form-horizontal"
-                          role="form"
-                          method="POST"
-                          action="{{ url('password/email') }}">
-                        <input type="hidden"
-                               name="_token"
-                               value="{{ csrf_token() }}">
+                    <div class="wrap-input">
+                        <input type="email"
+                               class="form-control input"
+                               name="email"
+                               value="{{ old('email') }}">
+                        <span class="focus-input"></span>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Email</label>
+                        <span class="symbol-input">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+                    </div>
 
-                            <div class="col-md-6">
-                                <input type="email"
-                                       class="form-control"
-                                       name="email"
-                                       value="{{ old('email') }}">
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit"
-                                        class="btn btn-primary"
-                                        style="margin-right: 15px;">
-                                    Reset password
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <div class="container-login-form-btn">
+                        <button type="submit"  class="login-form-btn">
+                            @lang('quickadmin.qa_reset_password')
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="../login">
+                            @lang('quickadmin.qa_back_to_login')
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
+
+
 @endsection

@@ -1,3 +1,4 @@
+
 <p>Email:{{$data ['email']}}</p>
 <p>User FullName: {{$data['name']}}</p>
 <p>Telephone Number: {{$data['phone']}}</p>
