@@ -27,6 +27,7 @@
                     @can('booking_delete')
                         @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                     @endcan
+                    <th>@lang('quickadmin.bookings.fields.is_active')</th>
                     <th>@lang('quickadmin.bookings.fields.first_name')</th>
                     <th>@lang('quickadmin.bookings.fields.last_name')</th>
                     <th>@lang('quickadmin.bookings.fields.address')</th>
@@ -55,6 +56,7 @@
                             @can('booking_delete')
                                 @if ( request('show_deleted') != 1 )<td></td>@endif
                             @endcan
+                            <td field-key='is_active'>{{ $booking->isActive }}</td>
                             <td field-key='first_name'>{{ $booking->first_name }}</td>
                             <td field-key='last_name'>{{ $booking->last_name}}</td>
                             <td field-key='address'>{{ $booking->address}}</td>

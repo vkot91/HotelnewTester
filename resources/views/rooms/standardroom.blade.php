@@ -48,7 +48,7 @@
           <div class="py-1">
             <div class="row align-items-center">
               <div class="col-2">
-                <h2 class="mb-0 site-logo"><a href="/">Account</a></h2>
+                <h2 class="mb-0 site-logo"><a href="/">Kompass</a></h2>
               </div>
               <div class="col-10">
                 <nav class="site-navigation text-right" role="navigation">
@@ -176,9 +176,9 @@
 
       </ul>
           @if (Route::has('login'))
-        @auth
+              @auth
+              <a style="margin-left: 30px" href="{{url('/admin/find_rooms') }} " class="btn btn-dark" role="button" aria-disabled="true">Book Now</a>
         @else
-
             <a style="margin-left: 30px" href="{{ route('login') }} " class="btn btn-dark" role="button" aria-disabled="true">Book Now</a>
         @endauth
           @endif

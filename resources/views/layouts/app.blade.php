@@ -24,14 +24,6 @@
                     {{Session::get('flash_message')}}
                 </div>
             @endif
-                @if(Session::has('flash_message_register'))
-                <div class="alert alert-success">
-                    <button type = "button" class = "close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    {{Session::get('flash_message_register')}}
-                </div>
-            @endif
-
-
             @if(isset($siteTitle))
                 <h3 class="page-title">
                     {{ $siteTitle }}

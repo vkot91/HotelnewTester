@@ -78,6 +78,7 @@ return [
             'user_id' => 'User ID',
             'diff_days' =>'Nights',
             'all_price' =>'Total price',
+            'is_active'=>'Status'
 		],
 	],
 

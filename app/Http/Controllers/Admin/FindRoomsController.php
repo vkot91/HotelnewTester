@@ -20,25 +20,17 @@ class FindRoomsController extends Controller
 
 
         if ($request->isMethod('POST')) {
-            $rooms = Room::with('booking')->whereHas('booking', function ($q) use ($time_from, $time_to) {
-                $q->where(function ($q2) use ($time_from, $time_to) {
-                    $q2->where('time_from', '>=', $time_to)
-                       ->orWhere('time_to', '<=', $time_from);
-                });
-            })->orWhereDoesntHave('booking')->get();
+              $rooms = Room::whereNotIn('id', function($query) use ($time_from, $time_to) {
+            $query->from('bookings')
+                ->select('room_id')
+                ->where('time_from', '<=', $time_to)
+                ->where('time_to', '>=', $time_from);
+        })->get();
         } else {
             $rooms = null;
         }
 
 
-        $rules = array(
-
-            'time_from' => 'required|date_format:Y-m-d|before_or_equal:time_to',
-            'time_to' => 'required|date_format:Y-m-d|after_or_equal:time_from'
-
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-        return view('admin.find_rooms.index', compact('rooms', 'time_from', 'time_to','validator'));
+        return view('admin.find_rooms.index', compact('rooms', 'time_from', 'time_to'));
     }
 }

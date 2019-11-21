@@ -33,7 +33,9 @@ class StoreBookingsRequest extends FormRequest
             'time_to' => 'required|date_format:'.config('app.date_format'). ' H:i',
             'additional_information' => 'required',
             'diff_days'=>'',
-            'app_price'=>''
+            'app_price'=>'',
+            'isActive'=>'',
+
 
         ];
     }

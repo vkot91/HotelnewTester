@@ -25,6 +25,7 @@ class Create1516728224BookingsTable extends Migration
                 $table->string('phone')->nullable();
                 $table->string('email');
                 $table->integer('all_price')->nullable();
+                $table->string('isActive')->default('Inactive');
 
 
                 $table->timestamps();

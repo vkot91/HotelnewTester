@@ -175,8 +175,9 @@
 
 
           @if (Route::has('login'))
-        @auth
-        @else
+              @auth
+              <a style="margin-left: 30px" href="{{url('/admin/find_rooms') }} " class="btn btn-dark" role="button" aria-disabled="true">Book Now</a>
+              @else
             <a style="margin-left: 30px" href="{{ route('login') }} " class="btn btn-dark" role="button" aria-disabled="true">Book Now</a>
         @endauth
 @endif

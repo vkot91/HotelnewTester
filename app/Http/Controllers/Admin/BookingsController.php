@@ -21,7 +21,7 @@ class BookingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index( )
+    public function index(Request $request )
     {
         if (!Gate::allows('booking_access')) {
             return abort(401);
@@ -36,8 +36,10 @@ class BookingsController extends Controller
         } else {
             $bookings = Booking::all();
         }
-
-        return view('admin.bookings.index', compact('bookings'));
+        $start_time = Carbon::parse($request->input('time_from'));
+        $finish_time =Carbon::parse($request->input('time_to'));
+        $diff_days = $start_time->diffInDays($finish_time);
+        return view('admin.bookings.index', compact('bookings','diff_days'));
     }
 
     /**
@@ -55,10 +57,9 @@ class BookingsController extends Controller
         $rooms = Room::get()->pluck('room_number', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
         $users = User::get()->pluck('id','id')->prepend(trans('quickadmin.qa_please_select'),'');
         $rooms2 = Room::get()->pluck('price', 'id');
-        $time_from = $request->input('time_from');
-        $time_to = $request->input('time_to');
 
-        return view('admin.bookings.create', compact('rooms','users','rooms2'));
+
+        return view('admin.bookings.create', compact('rooms','users','rooms2','diff_days'));
     }
 
     /**
@@ -72,9 +73,19 @@ class BookingsController extends Controller
         if (!Gate::allows('booking_create')) {
             return abort(401);
         }
-        $booking = Booking::create($request->all());
+
+        $start_time =Carbon::parse($request->input('time_from'));
+        $finish_time = Carbon::parse($request->input('time_to'));
+        $diff_days = $start_time->diffInDays($finish_time);
+        $room = Room::findOrFail($request->input('room_id'));
+        $attributes = $request->all();
+        $attributes['diff_days'] = $diff_days;
+        $attributes['all_price'] = $diff_days * $room->price;
+
+        Booking::create($attributes);
+
         \Session::flash('flash_message','Your reservation was successfully created. Awaiting confirmation from the administrator');
-        return redirect()->route('home');
+        return redirect()->route('home',compact('diff_days'));
     }
 
 

@@ -11,7 +11,22 @@
         </div>
 
         <div class="panel-body">
-          <div class="row">
+
+              <div class="row">
+                  <div class="col-xs-12 form-group">
+                      {!! Form::label('isActive', trans('quickadmin.bookings.fields.is_active').'*', ['class' => 'control-label']) !!}
+                      <select name="isActive" id="isActive" class = "form-control">
+                          <option value="Inactive">Inactive</option>
+                          <option value="Active">Active</option>
+                      </select>
+                      <p class="help-block"></p>
+                      @if($errors->has("isActive"))
+                          <p class="help-block">
+                              {{ $errors->first('isActive') }}
+                          </p>
+                      @endif
+                  </div>
+
               <div class="col-xs-12 form-group">
                 {!! Form::label('first_name', trans('quickadmin.bookings.fields.first_name').'*', ['class' => 'control-label']) !!}
                 {!! Form::text('first_name', old('first_name'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}
@@ -157,6 +172,7 @@
                     @endif
                 </div>
             </div>
+
         </div>
     </div>
 

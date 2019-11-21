@@ -11,6 +11,34 @@
         </div>
 
         <div class="panel-body">
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('user_id', trans('quickadmin.bookings.fields.user_id').'', ['class' => 'control-label']) !!}
+                    {!! Form::select('user_id', $users, old('user_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('user_id'))
+                        <p class="help-block">
+                            {{ $errors->first('user_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('isActive', trans('quickadmin.bookings.fields.is_active').'*', ['class' => 'control-label']) !!}
+                    <select name="isActive" id="isActive" class = "form-control">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                    <p class="help-block"></p>
+                    @if($errors->has('isActive'))
+                        <p class="help-block">
+                            {{ $errors->first('isActive') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
           <div class="row">
               <div class="col-xs-12 form-group">
                   {!! Form::label('first_name', trans('quickadmin.bookings.fields.first_name').'*', ['class' => 'control-label']) !!}
@@ -74,7 +102,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('room_id', trans('quickadmin.bookings.fields.room').'', ['class' => 'control-label']) !!}
-                    {!! Form::select('room_id', $rooms, old('room_id'), ['class' => 'form-control ']) !!}
+                    {!! Form::select('room_id', $rooms, old('room_id'), ['class' => 'form-control ','placeholder' => '','required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('room_id'))
                         <p class="help-block">
@@ -83,12 +111,10 @@
                     @endif
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('time_from', trans('quickadmin.bookings.fields.time-from').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('time_from', old('time_from'), ['class' => 'form-control datetimepicker', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::text('time_from', old('time_from'), ['class' => 'form-control datetimepicker','id'=>'datetimepicker1', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('time_from'))
                         <p class="help-block">
@@ -100,7 +126,7 @@
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('time_to', trans('quickadmin.bookings.fields.time-to').'*', ['class' => 'control-label']) !!}
-                    {!! Form::text('time_to', old('time_to'), ['class' => 'form-control datetimepicker', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::text('time_to', old('time_to'), ['class' => 'form-control datetimepicker','id'=>'datetimepicker2', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('time_to'))
                         <p class="help-block">
@@ -109,6 +135,19 @@
                     @endif
                 </div>
             </div>
+
+{{--            <div class="row">--}}
+{{--                <div class="col-xs-12 form-group">--}}
+{{--                    {!! Form::label('all_price', trans('quickadmin.bookings.fields.all_price').'*', ['class' => 'control-label']) !!}--}}
+{{--                    {!! Form::number('all_price', old('all_price'), ['class' => 'form-control ', 'placeholder' => '', 'required' => '']) !!}--}}
+{{--                    <p class="help-block"></p>--}}
+{{--                    @if($errors->has('all_price'))--}}
+{{--                        <p class="help-block">--}}
+{{--                            {{ $errors->first('all_price') }}--}}
+{{--                        </p>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('additional_information', trans('quickadmin.bookings.fields.additional-information').'*', ['class' => 'control-label']) !!}
@@ -121,11 +160,11 @@
                     @endif
                 </div>
             </div>
+
         </div>
     </div>
 
     {!! Form::submit(trans('quickadmin.qa_save'),['class' => 'btn btn-danger'])!!}
-
     {!! Form::close() !!}
 
 
@@ -139,11 +178,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script>
         $('.datetimepicker').datetimepicker({
-            format: "YYYY-MM-DD HH:mm"
+            format: "YYYY-MM-DD HH:mm",
 
         });
-
-
     </script>
+
 @stop
 

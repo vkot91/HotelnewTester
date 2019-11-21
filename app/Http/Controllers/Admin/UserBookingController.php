@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Booking;
 use App\Room;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
@@ -36,7 +37,20 @@ class UserBookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function create(Request $request)
+    {
+        if (!Gate::allows('booking_createUsers')) {
+            return abort(401);
+        }
 
+
+        $rooms = Room::get()->pluck('room_number', 'id')->prepend(trans('quickadmin.qa_please_select'), '');
+        $users = User::get()->pluck('id','id')->prepend(trans('quickadmin.qa_please_select'),'');
+        $rooms2 = Room::get()->pluck('price', 'id');
+
+
+        return view('user.bookings.create', compact('rooms','users','rooms2','diff_days'));
+    }
 
     /**
      * Store a newly created Booking in storage.
@@ -46,10 +60,22 @@ class UserBookingController extends Controller
      */
     public function store(StoreBookingsRequest $request)
     {
-        if (!Gate::allows('booking_create')) {
+        if (!Gate::allows('booking_createUsers')) {
             return abort(401);
         }
-        $booking = Booking::create($request->all());
+
+        $start_time = Carbon::parse($request->input('time_from'));
+        $finish_time = Carbon::parse($request->input('time_to'));
+        $diff_days = $start_time->diffInDays($finish_time);
+
+
+        $room = Room::findOrFail($request->input('room_id'));
+        $attributes = $request->all();
+        $attributes['diff_days'] = $diff_days;
+        $attributes['all_price'] = $diff_days * $room->price;
+
+        Booking::create($attributes);
+        //Booking::create($request->all());
 
         return redirect()->route('home');
     }

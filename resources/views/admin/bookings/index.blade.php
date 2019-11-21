@@ -30,18 +30,15 @@
                         @can('booking_delete')
                             @if ( request('show_deleted') != 1 )<th style="text-align:center;"><input type="checkbox" id="select-all" /></th>@endif
                         @endcan
+                            <th>@lang('quickadmin.bookings.fields.is_active')</th>
                             <th>@lang('quickadmin.bookings.fields.user_id')</th>
-                        <th>@lang('quickadmin.bookings.fields.first_name')</th>
-                        <th>@lang('quickadmin.bookings.fields.last_name')</th>
-                        <th>@lang('quickadmin.bookings.fields.address')</th>
-                        <th>@lang('quickadmin.bookings.fields.phone')</th>
                         <th>@lang('quickadmin.bookings.fields.email')</th>
                         <th>@lang('quickadmin.bookings.fields.room')</th>
                         <th>@lang('quickadmin.bookings.fields.time-from')</th>
                         <th>@lang('quickadmin.bookings.fields.time-to')</th>
-                        <th>@lang('quickadmin.bookings.fields.additional-information')</th>
                         <th>@lang('quickadmin.bookings.fields.diff_days')</th>
-                        <th>@lang('quickadmin.bookings.fields.all_price')</th>
+                            <th>@lang('quickadmin.bookings.fields.all_price')</th>
+
 
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
@@ -58,18 +55,15 @@
                                 @can('booking_delete')
                                     @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
+                                    <td field-key='is_active'>{{ $booking->isActive  }}</td>
                                     <td field-key='user_id'>{{ $booking->user->id or ''}}</td>
-                                <td field-key='first_name'>{{ $booking->first_name }}</td>
-                                <td field-key='last_name'>{{ $booking->last_name}}</td>
-                                <td field-key='address'>{{ $booking->address}}</td>
-                                <td field-key='phone'>{{ $booking->phone}}</td>
                                 <td field-key='email'>{{ $booking->email}}</td>
                                 <td field-key='room'>{{ $booking->room->room_number or '' }}</td>
                                 <td field-key='time_from'>{{ $booking->time_from }}</td>
                                 <td field-key='time_to'>{{ $booking->time_to }}</td>
-                                <td field-key='additional_information'>{{ $booking->additional_information }}</td>
-                                <td field-key='diff_days'>{{ $booking->diff_days  }}</td>
-                                <td field-key='all_price'>{{ $booking->all_price  }}</td>
+                                <td field-key ='diff_days'>{{$booking->diff_days}}</td>
+                                    <td field-key='all_price'>{{ $booking->all_price }}</td>
+
 
                                 @if( request('show_deleted') == 1 )
                                 <td>

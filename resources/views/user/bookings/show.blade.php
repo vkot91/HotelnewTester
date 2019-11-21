@@ -13,6 +13,10 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
+                            <th>@lang('quickadmin.bookings.fields.is_active')</th>
+                            <td field-key='is_active'>{{ $booking->isActive}}</td>
+                        </tr>
+                        <tr>
                             <th>@lang('quickadmin.bookings.fields.first_name')</th>
                             <td field-key='first_name'>{{ $booking->first_name}}</td>
                         </tr>

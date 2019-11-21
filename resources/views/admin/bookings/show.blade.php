@@ -13,6 +13,15 @@
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
+                            <th>@lang('quickadmin.bookings.fields.is_active')</th>
+                            <td field-key='first_name'>{{ $booking->isActive}}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('quickadmin.bookings.fields.user_id')</th>
+                            <td field-key='user_id'>{{ $booking->user->id or ''}}</td>
+
+                        </tr>
+                        <tr>
                             <th>@lang('quickadmin.bookings.fields.first_name')</th>
                             <td field-key='first_name'>{{ $booking->first_name}}</td>
                         </tr>
@@ -49,9 +58,12 @@
                             <td field-key='additional_information'>{!! $booking->additional_information !!}</td>
                         </tr>
                         <tr>
-                            <th>@lang('quickadmin.bookings.fields.user_id')</th>
-                            <td field-key='user_id'>{{ $booking->user->id or ''}}</td>
-
+                            <th>@lang('quickadmin.bookings.fields.diff_days')</th>
+                            <td field-key='additional_information'>{!! $booking->diff_days !!}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('quickadmin.bookings.fields.all_price')</th>
+                            <td field-key='additional_information'>{!! $booking->all_price !!}</td>
                         </tr>
                     </table>
                 </div>

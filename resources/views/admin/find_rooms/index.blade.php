@@ -66,9 +66,9 @@
                             <td field-key='category_id'>{{ $room->category->name or ''}}</td>
                             <td field-key='price'>{!! $room->price !!}</td>
                             <td>
-                                @can('booking_create')
+                                @can('booking_createUsers')
                                     <button class="btn btn-danger">
-                                        <a style="color: #ffffff;" href="{{ route('admin.bookings.create',
+                                        <a style="color: #ffffff;" href="{{ route('user.bookings.create',
                                         ['room_id' => $room->id,'time_from' => $time_from, 'time_to' => $time_to]) }}">
                                             {!!trans('quickadmin.find-room.book_room')!!}</a>
                                     </button>
@@ -91,19 +91,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script>
         $('.datetimepicker').datetimepicker({
-            format: "YYYY-MM-DD HH:mm"
+            format: "YYYY-MM-DD HH:mm",
+            minDate: new Date()
         });
+
     </script>
     <script>
         $('#datetimepicker1').datetimepicker();
         $('#datetimepicker2').datetimepicker({
-            useCurrent: false //Important! See issue #1075
         });
         $("#datetimepicker1").on("dp.change", function (e) {
             $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
         });
         $("#datetimepicker2").on("dp.change", function (e) {
-            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+            $('#datetimepicker1').data("DateTimePicker");
         });
     </script>
 

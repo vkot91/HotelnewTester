@@ -17,7 +17,7 @@
 <p>Room: {{$room_id}}</p>
 <p>Time of arrival: {{$time_from}}</p>
 <p>Time of departure: {{$time_to}}</p>
-<p>Price:{{$all_price}}</p>
+<p>Price: {{$all_price}} $</p>
 
 <h3>Hotel Kompass Administrator </h3>
 </body>

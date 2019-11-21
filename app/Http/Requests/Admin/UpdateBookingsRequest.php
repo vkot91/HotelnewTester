@@ -34,7 +34,9 @@ class UpdateBookingsRequest extends FormRequest
             'additional_information' => 'required',
             'user_id'=>'',
             'diff_days'=>'',
-            'app_price'=>''
+            'app_price'=>'',
+            'isActive'=>'',
+
         ];
     }
 }

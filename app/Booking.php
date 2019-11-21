@@ -21,12 +21,15 @@ class Booking extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['time_from', 'time_to', 'diff_days','additional_information', 'room_id','first_name', 'last_name', 'address', 'phone', 'email','user_id','all_price'];
+    protected $fillable = ['time_from', 'time_to', 'diff_days', 'additional_information', 'room_id', 'first_name', 'last_name', 'address', 'phone', 'email', 'user_id', 'all_price', 'isActive'];
     /**
      * Set to null if empty
      * @param $input
      */
+public function diffdays()
+{
 
+}
 
     /**
      * Set to null if empty
@@ -43,6 +46,7 @@ class Booking extends Model
         $this->attributes['user_id'] = $input ? $input : null;
 
     }
+
     /**
      * Set attribute to date format
      * @param $input
@@ -85,7 +89,16 @@ class Booking extends Model
             $this->attributes['time_to'] = null;
         }
     }
+        public function diff($booking)
+        {
+            if (is_null($booking->time_to) || is_null($booking->time_from)) {
+                $diff_days = 0; // or throw new \InvalidArgumentException();
+            } else {
+                $diff_days = $booking->time_to->diffInDays($booking->time_from);
+            }
+            return $diff_days;
 
+        }
     /**
      * Get attribute from date format
      * @param $input
@@ -111,24 +124,12 @@ class Booking extends Model
 
     public function user()
     {
-        return $this ->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function getFullNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
     }
-
-    public function diff(Request $request)
-    {
-        $start_time = \Carbon\Carbon::parse($request->input('time_from'));
-        $finish_time = \Carbon\Carbon::parse($request->input('time_to'));
-        $diff_days = $start_time->diffInDays($finish_time, false);
-        $this->attributes['diff_days'] = $diff_days;
-        return $diff_days;
-    }
-
-
-
 
 }
